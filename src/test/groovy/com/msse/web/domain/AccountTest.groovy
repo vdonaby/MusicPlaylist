@@ -42,7 +42,6 @@ class AccountTest extends Specification {
 
         then:
         account.email == 'vdonaby@gmail.com'
-        account.password == 'Password1'
         account.name == 'Test Account'
 
     }
@@ -156,7 +155,7 @@ class AccountTest extends Specification {
         then:
         account.email == 'encryptedpassword@gmail.com'
         account.name == 'Test Account'
-        account.password != 'Password1'
+        account.password == 'Password1'
 
 
 
