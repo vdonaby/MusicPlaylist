@@ -1,18 +1,19 @@
 package com.msse.web.domain
 
+import com.msse.web.utilities.EncryptPassword
 import com.msse.web.utilities.ValidPassword
 import org.hibernate.validator.constraints.Email
 import org.hibernate.validator.constraints.NotBlank
 
 import javax.persistence.Column
+import javax.persistence.Convert
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.OneToMany
-import javax.validation.Valid
+import javax.persistence.PrePersist
 import javax.validation.constraints.NotNull
-import javax.xml.bind.ValidationException
 
 
 /**
@@ -29,7 +30,7 @@ class Account {
     @NotNull @Email @Column(unique=true)
     String Email
 
-    @NotNull @NotBlank @ValidPassword
+    @NotNull @NotBlank @ValidPassword @Convert(converter = EncryptPassword.class)
     String password
 
     @NotNull
@@ -37,8 +38,6 @@ class Account {
 
     @OneToMany
     List<Playlist> playlists;
-
-
 
 }
 

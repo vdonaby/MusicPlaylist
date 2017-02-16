@@ -7,7 +7,6 @@ import javax.persistence.Id
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import javax.validation.constraints.NotNull
-import java.sql.Time
 import java.time.LocalDate
 
 
