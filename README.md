@@ -1,7 +1,7 @@
 # Music Playlist
 
 ### Description
-Signup for an account and add your songs to a playlist.
+Sign up for an account and add your songs to a playlist.
 
 ### Build Steps
 
