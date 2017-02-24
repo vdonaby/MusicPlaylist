@@ -3,7 +3,7 @@
 ### Description
 Signup for an account and add your songs to a playlist.
 
-## Build Steps
+### Build Steps
 
 1) ./gradlew build
 
