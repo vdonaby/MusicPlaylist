@@ -1,4 +1,4 @@
-package com.msse.web.Repository
+package com.msse.web.repository
 
 import com.msse.web.domain.Songs
 import org.springframework.data.jpa.repository.Query

@@ -1,4 +1,4 @@
-package com.msse.web.Repository
+package com.msse.web.repository
 
 import com.msse.web.domain.Account
 import org.springframework.data.repository.CrudRepository

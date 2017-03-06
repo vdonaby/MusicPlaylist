@@ -1,8 +1,8 @@
 package com.msse.web.domain
 
-import com.msse.web.Repository.ArtistRepository
-import com.msse.web.Repository.ReleaseRepository
-import com.msse.web.Repository.SongsRepository
+import com.msse.web.repository.ArtistRepository
+import com.msse.web.repository.ReleaseRepository
+import com.msse.web.repository.SongsRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification

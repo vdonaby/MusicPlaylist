@@ -1,14 +1,13 @@
 package com.msse.web.domain
 
-import com.msse.web.Repository.AccountRepository
-import com.msse.web.Repository.ArtistRepository
-import com.msse.web.Repository.PlaylistRepository
-import com.msse.web.Repository.ReleaseRepository
-import com.msse.web.Repository.SongsRepository
+import com.msse.web.repository.AccountRepository
+import com.msse.web.repository.ArtistRepository
+import com.msse.web.repository.PlaylistRepository
+import com.msse.web.repository.ReleaseRepository
+import com.msse.web.repository.SongsRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
-import spock.lang.Unroll
 
 import javax.validation.ConstraintViolationException
 import java.time.LocalDate
@@ -17,7 +16,6 @@ import java.time.LocalDate
  * Created by z001hk8 on 2/7/17.
  */
 
-@Unroll
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PlaylistTest extends Specification {
 
@@ -43,7 +41,7 @@ class PlaylistTest extends Specification {
 
         given:
 
-        def account = new Account(email: 'validplaylist@gmail.com', password: 'Password1', name: "Test Account")
+        def account = new Account(email: 'accountplaylist@gmail.com', password: 'Password1', name: "Test Account")
         accountRepository.save(account)
         def playlist = new Playlist(name: 'myPlaylist', account: account)
         def startingPlaylistCount = playlistRepository.count()

@@ -1,6 +1,6 @@
 package com.msse.web.domain
 
-import com.msse.web.Repository.AccountRepository
+import com.msse.web.repository.AccountRepository
 import org.springframework.dao.DataIntegrityViolationException
 import spock.lang.Specification
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +13,6 @@ import javax.validation.ConstraintViolationException
  * Created by z001hk8 on 2/7/17.
  */
 
-@Unroll
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AccountTest extends Specification {
 
