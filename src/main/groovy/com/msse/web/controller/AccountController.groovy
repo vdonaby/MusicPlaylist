@@ -9,27 +9,30 @@
 
 package com.msse.web.controller
 
+import com.msse.web.domain.Account
 import com.msse.web.service.AccountService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
-@RequestMapping ("/account")
+//@RequestMapping ("/account")
 class AccountController {
 
 
     //connect to AccountService for receiving Jason data
-    AccountService accountService
     @Autowired
-    public AccountController(AccountService accountService) {
-        this.accountService = accountService
+    AccountService accountService
 
+    @PostMapping
+    Account addAcount(@RequestBody Account account) {
+        return accountService.addAcount(account)
     }
 
 
-    //connect to the playList since several playLists for each account
+
+    //Return playList since several playLists for each account
 
 
 }
