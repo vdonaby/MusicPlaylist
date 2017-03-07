@@ -28,7 +28,7 @@ class Account {
     String name
 
     @OneToMany
-    List<Playlist> playlists;
+    List<Playlist> playlists
 
 }
 

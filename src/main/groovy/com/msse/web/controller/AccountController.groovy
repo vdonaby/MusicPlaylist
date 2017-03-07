@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 import java.awt.print.Pageable
+import org.springframework.data.domain.Page
 
 @RestController
 //@RequestMapping ("/account")
@@ -41,21 +42,19 @@ class AccountController {
 
 
 
-    @PostMapping(value="/playlists")
-    List<Playlist> setPlayLists(List<Playlist> playlists) {
-        return PlaylistService.setPlayLists(playlists)
-
-    }
 
     /**pass Pageable instance to Accountservice,
      which then pass it to AccountRepository
+     check sorting lists
      */
     @GetMapping(value="/playlists")
     // return playlists pageable and sortable
-    List<Playlist> getPlayLists(Pageable pageable)
+    Page<Playlist> getPlayLists(Pageable request)
     {
-        return PlaylistService.getPlayLists(pageable)
+        Page<Playlist> playList =  PlaylistService.getPlayLists(request)
+        playList
     }
+
 
 
 }

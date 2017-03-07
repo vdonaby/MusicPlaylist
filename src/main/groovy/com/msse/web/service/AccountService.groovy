@@ -35,7 +35,7 @@ class AccountService {
     // Receives JSON data to create an Account
 
 
-    @PostMapping("/")
+    @PostMapping("/account")
     Account setAccountData() {
         RestTemplate restTemplate = new RestTemplate()
         Account account = restTemplate.postForObject("http://localhost:8080/data/accountData.json", Account.class)
@@ -45,7 +45,7 @@ class AccountService {
     //A2
     //add exception for invalid data 400 bad request
     // check which works better "try and catch" vs. throw
-    @GetMapping("/")
+    @GetMapping("/account")
     Account getAccountData() {
         try {
             RestTemplate restTemplate = new RestTemplate()
@@ -59,9 +59,7 @@ class AccountService {
 
     //A3
 
-   /**
-   List<Playlist> playLists (Pageable pageable)
-    **/
+       // Page<Playlist> listAllPlayLists (Pageable pageable)
 
 
     //A4
