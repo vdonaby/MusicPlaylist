@@ -31,35 +31,40 @@ class AccountService {
         return accountRepository.save(account)
     }
 
-
     //A1
-
-   // Receives JSON data to create an Account
+    // Receives JSON data to create an Account
 
 
     @PostMapping("/")
     Account setAccountData() {
         RestTemplate restTemplate = new RestTemplate()
         Account account = restTemplate.postForObject("http://localhost:8080/data/accountData.json", Account.class)
-        }
-
+        return account
+    }
 
     //A2
     //add exception for invalid data 400 bad request
     // check which works better "try and catch" vs. throw
     @GetMapping("/")
     Account getAccountData() {
-        try{
-    RestTemplate restTemplate = new RestTemplate()
-    Account account = restTemplate.getForObject("http://localhost:8080/data/accountData.json", Account.class)
-    return account}
-        catch (HttpClientErrorException ex){
+        try {
+            RestTemplate restTemplate = new RestTemplate()
+            Account account = restTemplate.getForObject("http://localhost:8080/data/accountData.json", Account.class)
+            return account
+        }
+        catch (HttpClientErrorException ex) {
             return new ResponseEntity([error: ex.message], ex.statusCode)
         }
     }
 
-
     //A3
+
+   /**
+   List<Playlist> playLists (Pageable pageable)
+    **/
+
+
+    //A4
 
 
 

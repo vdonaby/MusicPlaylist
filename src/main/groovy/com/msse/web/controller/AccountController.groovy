@@ -10,11 +10,16 @@
 package com.msse.web.controller
 
 import com.msse.web.domain.Account
+import com.msse.web.domain.Playlist
 import com.msse.web.service.AccountService
+import com.msse.web.service.PlaylistService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+
+import java.awt.print.Pageable
 
 @RestController
 //@RequestMapping ("/account")
@@ -24,6 +29,10 @@ class AccountController {
     //connect to AccountService for receiving Jason data
     @Autowired
     AccountService accountService
+    AccountController( AccountService accountService ){
+        this.accountService = accountService
+    }
+
 
     @PostMapping
     Account addAcount(@RequestBody Account account) {
@@ -32,7 +41,21 @@ class AccountController {
 
 
 
-    //Return playList since several playLists for each account
+    @PostMapping(value="/playlists")
+    List<Playlist> setPlayLists(List<Playlist> playlists) {
+        return PlaylistService.setPlayLists(playlists)
+
+    }
+
+    /**pass Pageable instance to Accountservice,
+     which then pass it to AccountRepository
+     */
+    @GetMapping(value="/playlists")
+    // return playlists pageable and sortable
+    List<Playlist> getPlayLists(Pageable pageable)
+    {
+        return PlaylistService.getPlayLists(pageable)
+    }
 
 
 }

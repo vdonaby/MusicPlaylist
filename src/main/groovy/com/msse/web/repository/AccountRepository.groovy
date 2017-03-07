@@ -1,11 +1,13 @@
 package com.msse.web.repository
 
 import com.msse.web.domain.Account
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.PagingAndSortingRepository
 
 /**
- * Created by z001hk8 on 2/9/17.
+ A4: Returns the playlists for an Account and is sortable and pageable
  */
-interface AccountRepository extends CrudRepository<Account, Long> {
+
+//extending CrudRepository to PagingAndSortingRepository
+interface AccountRepository extends PagingAndSortingRepository<Account, Integer> {
 
 }
