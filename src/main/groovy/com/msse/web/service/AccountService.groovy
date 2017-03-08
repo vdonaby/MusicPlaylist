@@ -13,12 +13,12 @@ package com.msse.web.service
 import com.msse.web.domain.Account
 import com.msse.web.repository.AccountRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
+import javax.servlet.http.HttpServletResponse
 
 @Service
 class AccountService {
@@ -43,23 +43,38 @@ class AccountService {
     }
 
     //A2
-    //add exception for invalid data 400 bad request
-    // check which works better "try and catch" vs. throw
-    @GetMapping("/account")
-    Account getAccountData() {
-        try {
-            RestTemplate restTemplate = new RestTemplate()
-            Account account = restTemplate.getForObject("http://localhost:8080/data/accountData.json", Account.class)
-            return account
-        }
-        catch (HttpClientErrorException ex) {
-            return new ResponseEntity([error: ex.message], ex.statusCode)
-        }
-    }
+
+
+    /**a
+     - add exception for invalid data 400 bad request
+
+     - diff way:
+     // check which works better "try and catch" vs. throw
+     @GetMapping("/account")
+      Account getAccountData() {
+      try {
+      RestTemplate restTemplate = new RestTemplate()
+      Account account = restTemplate.getForObject("http://localhost:8080/data/accountData.json", Account.class)
+      return account
+      }
+      catch (HttpClientErrorException ex) {
+      return new ResponseEntity([error: ex.message], ex.statusCode)
+      }
+      }
+     */
+ @GetMapping('/{accountId}')
+  Account getAccount(@PathVariable String id, HttpServletResponse response) {
+  Account aacount = accountService.getAccount(aacount)
+  if (!aacount) {
+  response.setStatus(400)
+  }
+  return aacount
+  }
+
 
     //A3
 
-       // Page<Playlist> listAllPlayLists (Pageable pageable)
+    // Page<Playlist> listAllPlayLists (Pageable pageable)
 
 
     //A4

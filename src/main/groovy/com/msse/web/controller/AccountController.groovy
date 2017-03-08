@@ -14,47 +14,62 @@ import com.msse.web.domain.Playlist
 import com.msse.web.service.AccountService
 import com.msse.web.service.PlaylistService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 import java.awt.print.Pageable
-import org.springframework.data.domain.Page
 
 @RestController
-//@RequestMapping ("/account")
+/**
+-can be added.
+@RequestMapping ("/account") --why
+
+-Json file can be added as MediaType
+ */
 class AccountController {
 
 
     //connect to AccountService for receiving Jason data
     @Autowired
     AccountService accountService
-    AccountController( AccountService accountService ){
+    AccountController(AccountService accountService){
         this.accountService = accountService
     }
 
-
-    @PostMapping
+    //psot an account
+    @PostMapping('/account')
     Account addAcount(@RequestBody Account account) {
         return accountService.addAcount(account)
     }
 
 
+    @GetMapping('/account')
+    Page list(Pageable pageable) {
+        return postService.listPosts(pageable)
+    }
 
 
     /**pass Pageable instance to Accountservice,
      which then pass it to AccountRepository
      check sorting lists
+
+     diff way:
+     //localhost:8080/playlists?page=0&size=2&sort=createdDate,desc
+     @GetMapping('/playlists')
+      Page playlist(Pageable pageable) {
+      return PlaylistService.playlist(pageable)
+      }
      */
-    @GetMapping(value="/playlists")
+
+    @GetMapping('/account/{accountId}/playlists')
     // return playlists pageable and sortable
     Page<Playlist> getPlayLists(Pageable request)
     {
         Page<Playlist> playList =  PlaylistService.getPlayLists(request)
         playList
     }
-
-
 
 }
