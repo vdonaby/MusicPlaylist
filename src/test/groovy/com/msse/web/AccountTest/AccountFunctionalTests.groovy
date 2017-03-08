@@ -27,16 +27,19 @@ class AccountFunctionalTests extends Specification {
     @Autowired
     TestRestTemplate testRestTemplate
 
-
     @Autowired
     AccountRepository accountRepository
 
     @Autowired
     PlaylistRepository playlistRepository
 
+
+
+    //A1
+
     def "get account with valid data"() {
         setup:
-        def account = new Account(Email: "abc@gmail.com", password: "lifeis1!", name: "ice")
+        def account = new Account(Email: "user@gmail.com", password: "3!321", name: "User")
         accountRepository.save(account)
 
         when:
@@ -46,5 +49,17 @@ class AccountFunctionalTests extends Specification {
         responseEntity.statusCode == HttpStatus.OK
 
     }
+
+    //A2
+
+
+    //A3
+
+
+    //A4
+
+
+
+
 
 }
