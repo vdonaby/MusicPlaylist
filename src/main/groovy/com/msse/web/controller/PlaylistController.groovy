@@ -1,6 +1,8 @@
 package com.msse.web.controller
 
+import com.msse.web.domain.Account
 import com.msse.web.domain.Playlist
+import com.msse.web.repository.AccountRepository
 import com.msse.web.service.PlaylistService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,8 +21,14 @@ class PlaylistController {
     @Autowired
     PlaylistService playlistService
 
+    @Autowired
+    AccountRepository accountRepository;
+
+
     @PostMapping("/playlist")
     Playlist addPlaylist(@RequestBody Playlist playlist) {
+
+        accountRepository.save(playlist.getAccount());
         return playlistService.addPlaylistService(playlist)
     }
 }
