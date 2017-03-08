@@ -6,17 +6,8 @@ import com.msse.web.utilities.ValidPassword
 import org.hibernate.validator.constraints.Email
 import org.hibernate.validator.constraints.NotBlank
 
-import javax.persistence.Column
-import javax.persistence.Convert
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.PrePersist
+import javax.persistence.*
 import javax.validation.constraints.NotNull
-
-
 /**
  * Created by z001hk8 on 2/7/17.
  */
@@ -46,7 +37,7 @@ class Account {
     String name
 
     @OneToMany
-    List<Playlist> playlists;
+    List<Playlist> playlists
 
 }
 
