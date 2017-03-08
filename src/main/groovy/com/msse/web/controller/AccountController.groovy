@@ -13,8 +13,8 @@ import com.msse.web.domain.Account
 import com.msse.web.domain.Playlist
 import com.msse.web.service.AccountService
 import com.msse.web.service.PlaylistService
+import org.h2.store.Page
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -45,6 +45,11 @@ class AccountController {
         return accountService.addAcount(account)
     }
 
+    /**
+     Using response entity class to modify response header
+
+
+     */
 
     @GetMapping('/account')
     Page list(Pageable pageable) {

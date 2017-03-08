@@ -62,14 +62,14 @@ class AccountService {
       }
       }
      */
- @GetMapping('/{accountId}')
-  Account getAccount(@PathVariable String id, HttpServletResponse response) {
-  Account aacount = accountService.getAccount(aacount)
-  if (!aacount) {
-  response.setStatus(400)
-  }
-  return aacount
-  }
+     @GetMapping('/{accountId}')
+      Account getAccount(@PathVariable String id, HttpServletResponse response) {
+      Account aacount = accountService.getAccount(aacount)
+      if (!aacount) {
+      response.setStatus(400)
+      }
+      return aacount
+      }
 
 
     //A3
