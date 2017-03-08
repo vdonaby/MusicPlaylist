@@ -1,5 +1,6 @@
 package com.msse.web.domain
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.msse.web.utilities.EncryptPassword
 import com.msse.web.utilities.ValidPassword
 import org.hibernate.validator.constraints.Email
@@ -27,13 +28,21 @@ class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     String id
 
-    @NotNull @Email @Column(unique=true)
+    @NotNull
+    @Email
+    @Column(unique=true)
+    @JsonProperty("email")
     String Email
 
-    @NotNull @NotBlank @ValidPassword @Convert(converter = EncryptPassword.class)
+    @NotNull
+    @NotBlank
+    @ValidPassword
+    @Convert(converter = EncryptPassword.class)
+    @JsonProperty("password")
     String password
 
     @NotNull
+    @JsonProperty("name")
     String name
 
     @OneToMany

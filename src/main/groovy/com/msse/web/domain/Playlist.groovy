@@ -1,5 +1,8 @@
 package com.msse.web.domain
 
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonProperty
+
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -23,12 +26,16 @@ class Playlist {
     String id
 
     @NotNull
+    @JsonProperty("name")
     String name
 
-    @NotNull @ManyToOne
+    @NotNull
+    @ManyToOne
+    @JsonProperty("account")
     Account Account
 
     @ManyToMany
+    @JsonProperty("songs")
     List<Songs> songs
 
 }
