@@ -18,7 +18,7 @@ import spock.lang.Specification
 
 @ContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PlaylistControllerTest extends Specification{
+class PlaylistControllerFunctionalTest extends Specification{
 
     @Autowired
     AccountRepository accountRepository
@@ -32,7 +32,28 @@ class PlaylistControllerTest extends Specification{
     /*
     Requirement P1
      */
-    def "add valid playlist"() {
+    def "add a playlist"() {
+
+        setup:
+
+        def account = new Account(email: 'validplaylist@gmail.com', password: 'Password1', name: "Test Account")
+        accountRepository.save(account)
+        def myPlaylist = new Playlist(name: 'myPlaylist', account: account)
+        playlistRepository.save(myPlaylist)
+
+        when:
+        ResponseEntity<Playlist> response = this.testRestTemplate.postForEntity("/playlist", myPlaylist, Playlist.class)
+
+        then:
+        response.statusCode == HttpStatus.OK
+        System.out.println('System response: ' + response.toString())
+        Playlist actual = response.body
+        actual.name == "myPlaylist"
+        actual.account.id == account.id
+
+    }
+
+    def "add a song to a playlist"() {
 
         setup:
 
