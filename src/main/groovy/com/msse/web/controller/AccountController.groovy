@@ -14,10 +14,10 @@ import com.msse.web.domain.Playlist
 import com.msse.web.service.AccountService
 import com.msse.web.service.PlaylistService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 
@@ -77,8 +77,6 @@ class AccountController {
       }
      */
 
- /////////////
-
 
     //A2 and A3
 
@@ -116,8 +114,9 @@ class AccountController {
 
     //A4
 
-    @GetMapping('/account/{accountId}/playlists')
-    // return playlists pageable and sortable
+    @GetMapping("/account/playlist?page=0&size=3&sort=createdDate,desc")
+    /** return playlist pageable and sortable
+     */
     Page<Playlist> getPlayLists(Pageable request)
     {
         Page<Playlist> playList =  PlaylistService.getPlayLists(request)
@@ -129,6 +128,10 @@ class AccountController {
  /**pass Pageable instance to Accountservice,
  which then pass it to AccountRepository
  check sorting lists
+
+ Q: since each account has its playlist,
+ do we need to include @PathVariable String Email
+ then @GetMapping('/account/{Email}/playlists')
 
  diff way:
  //localhost:8080/playlists?page=0&size=2&sort=createdDate,desc

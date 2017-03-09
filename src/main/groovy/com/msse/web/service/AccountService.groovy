@@ -11,8 +11,11 @@
 package com.msse.web.service
 
 import com.msse.web.domain.Account
+import com.msse.web.domain.Playlist
 import com.msse.web.repository.AccountRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -30,19 +33,20 @@ class AccountService {
     }
 
 
-    //A2
+    //A2&A3
     Account getAccount(String Email) {
 
-        Account account = userRepository.findOne(Email)
-        return postRespository.save(account)
+        Account account = accountRepository.findOne(Email)
+        return accountRepository.save(account)
+
     }
-
-    //A3
-
-    // Page<Playlist> listAllPlayLists (Pageable pageable)
 
 
     //A4
 
+    Page<Playlist> listAllPlayLists (Pageable pageable){
+        Page result = postRespository.findAll(request)
+        result
+    }
 
 }
