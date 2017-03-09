@@ -13,7 +13,6 @@ import com.msse.web.domain.Account
 import com.msse.web.domain.Playlist
 import com.msse.web.service.AccountService
 import com.msse.web.service.PlaylistService
-import org.h2.store.Page
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -45,17 +44,18 @@ class AccountController {
         return accountService.addAcount(account)
     }
 
+
     /**
      Using response entity class to modify response header
 
 
      */
 
-    @GetMapping('/account')
+   /** @GetMapping('')
     Page list(Pageable pageable) {
         return postService.listPosts(pageable)
     }
-
+ **/
 
     /**pass Pageable instance to Accountservice,
      which then pass it to AccountRepository

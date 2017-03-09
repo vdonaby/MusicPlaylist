@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.client.RestTemplate
+
 import javax.servlet.http.HttpServletResponse
 
 @Service
@@ -32,9 +33,22 @@ class AccountService {
     }
 
     //A1
-    // Receives JSON data to create an Account
+    /**Receives JSON data to create an Account
+
+     @PostMapping("/account")
+     ResponseEntity<Account> set() {
+
+     Account account = new Account();
+     account.setEmail("user@gmail.com");
+     account.setPassword("3!321");
+     account.setName("User");
+
+     return new ResponseEntity<Account>(account, HttpStatus.OK);
+     }
+     */
 
 
+    //A1
     @PostMapping("/account")
     Account setAccountData() {
         RestTemplate restTemplate = new RestTemplate()
@@ -43,7 +57,6 @@ class AccountService {
     }
 
     //A2
-
 
     /**a
      - add exception for invalid data 400 bad request
@@ -62,9 +75,10 @@ class AccountService {
       }
       }
      */
-     @GetMapping('/{accountId}')
-      Account getAccount(@PathVariable String id, HttpServletResponse response) {
-      Account aacount = accountService.getAccount(aacount)
+     @GetMapping('/account/{Email}')
+      Account getAccount(@PathVariable String Email, HttpServletResponse response) {
+      RestTemplate restTemplate = new RestTemplate()
+      Account aacount = restTemplate.getForObject("http://localhost:8080/data/accountData.json", Account.class)
       if (!aacount) {
       response.setStatus(400)
       }
