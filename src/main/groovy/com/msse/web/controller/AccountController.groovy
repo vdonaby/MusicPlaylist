@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 
@@ -44,9 +45,7 @@ class AccountController {
 
     //A1
     @PostMapping("/account")
-    Account addAccount() {
-        RestTemplate restTemplate = new RestTemplate()
-        Account account = restTemplate.postForObject("http://localhost:8080/static/accountData.json", Account.class)
+    Account addAccount(@RequestBody Account account) {
         return accountService.addAccount(account)
     }
 
@@ -80,14 +79,11 @@ class AccountController {
 
     //A2 and A3
 
-    @GetMapping("/account/{Email}")
-    Account getAccount(@PathVariable String Email, HttpServletResponse response) {
-        RestTemplate restTemplate = new RestTemplate()
-        Account account = restTemplate.getForObject("http://localhost:8080/static/accountData.json", Account.class)
-        if (!account) {
-            response.setStatus(400)
-        }
-        return accountService.getAccount(Email)
+    @GetMapping("/account/{email}")
+    Account getAccount(@PathVariable String email) {
+        def account = accountService.getAccount(email)
+        System.out.println("Account: " + account + " passssss " + account.password)
+        return account
     }
 
     /**

@@ -23,7 +23,7 @@ class Account {
     @Email
     @Column(unique=true)
     @JsonProperty("email")
-    String Email
+    String email
 
     @NotNull
     @NotBlank

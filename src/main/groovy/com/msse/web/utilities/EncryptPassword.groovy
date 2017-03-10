@@ -1,10 +1,6 @@
 package com.msse.web.utilities
 
 import javax.persistence.AttributeConverter
-import javax.persistence.PostPersist
-import javax.persistence.PrePersist
-import javax.validation.ConstraintValidator
-import javax.validation.ConstraintValidatorContext
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 
