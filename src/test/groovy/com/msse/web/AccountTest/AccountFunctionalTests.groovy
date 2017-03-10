@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-import java.awt.*
 import java.awt.PageAttributes.MediaType
-
 /**
  A1: Receives JSON data to create an Account
  A2: Return an error response from the create Account endpoint if the account values are invalid
@@ -46,7 +44,8 @@ class AccountFunctionalTests extends Specification {
         accountRepository.save(account)
 
         when:
-        ResponseEntity <Account> responseEntity = this.testRestTemplate.postForEntity("/account", new Account(Email: "user@gmail.com", password: "3!321", name: "User"), Account.class)
+        ResponseEntity <Account> responseEntity = this.testRestTemplate.postForEntity("/account",
+                new Account(Email: "user@gmail.com", password: "3!321", name: "User"), Account.class)
 
         then:
         responseEntity.statusCode == HttpStatus.OK
@@ -66,13 +65,7 @@ class AccountFunctionalTests extends Specification {
      HttpStatus.OK is 200 == means OK
      */
 
-
-    //A3
-    /**
-    A3
-     modify it to data-driven test email or id
-     */
-    def "get account with an email"() {
+    def "get account"() {
         setup:
         def account = new Account(Email: "user@gmail.com", password: "3!321", name: "User")
         accountRepository.save(account)
@@ -89,15 +82,46 @@ class AccountFunctionalTests extends Specification {
     }
 
 
+    //A3
+    /**
+    A3
+     modify it to data-driven test email or id
+     */
+
+    def "return account data based on email" () {
+
+        setup:
+        AccountRepository accountRepository = Mock(AccountRepository)
+        context.getBean(AccountRepository).accountRepository = accountRepository
+
+        when:
+        def result = testRestTemplate.getForObject('/cars/{Email}', Account)
+
+        then:
+        1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "3!321")
+        result.name == "User"
+        result.name == "3!321"
+
+    }
+
+
     //A4
+    //check if there is another way to test pageable and sortable
+    def "get playlist pageable and sortable"() {
 
-    def "get playlists pagable and sortable"() {
+        setup:
+            def account = new Account()
+        when:
+            (1..3).each{
+            account = new Account(name:"User $it")}
+        then:
+        accountRepository.save(account)
 
-
+        }
 
     }
 
 
 
 
-}
+
