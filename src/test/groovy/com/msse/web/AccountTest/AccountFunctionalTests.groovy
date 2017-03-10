@@ -40,12 +40,12 @@ class AccountFunctionalTests extends Specification {
 
     def "add account with valid data"() {
         setup:
-        def account = new Account(Email: "user@gmail.com", password: "3!321", name: "User")
+        def account = new Account(email: "user@gmail.com", password: "Password1", name: "User")
         accountRepository.save(account)
 
         when:
         ResponseEntity <Account> responseEntity = this.testRestTemplate.postForEntity("/account",
-                new Account(Email: "user@gmail.com", password: "3!321", name: "User"), Account.class)
+                new Account(email: "user@gmail.com", password: "Password1", name: "User"), Account.class)
 
         then:
         responseEntity.statusCode == HttpStatus.OK
@@ -67,11 +67,11 @@ class AccountFunctionalTests extends Specification {
 
     def "get account"() {
         setup:
-        def account = new Account(Email: "user@gmail.com", password: "3!321", name: "User")
+        def account = new Account(email: "user@gmail.com", password: "Password1", name: "User")
         accountRepository.save(account)
 
         when:
-        ResponseEntity <Account> responseEntity = this.testRestTemplate.getForEntity("/account/{Email}", Account)
+        ResponseEntity <Account> responseEntity = this.testRestTemplate.getForEntity("/account/user@gmail.com", Account)
 
         then:
         responseEntity.statusCode == HttpStatus.OK
@@ -98,7 +98,8 @@ class AccountFunctionalTests extends Specification {
         def result = testRestTemplate.getForObject('/cars/{Email}', Account)
 
         then:
-        1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "3!321")
+        1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
+        1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
         result.name == "User"
         result.name == "3!321"
 

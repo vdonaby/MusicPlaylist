@@ -80,14 +80,9 @@ class AccountController {
 
     //A2 and A3
 
-    @GetMapping("/account/{Email}")
-    Account getAccount(@PathVariable String Email, HttpServletResponse response) {
-        RestTemplate restTemplate = new RestTemplate()
-        Account account = restTemplate.getForObject("http://localhost:8080/static/accountData.json", Account.class)
-        if (!account) {
-            response.setStatus(400)
-        }
-        return accountService.getAccount(Email)
+    @GetMapping("/account/{email}")
+    Account getAccount(@PathVariable String email, HttpServletResponse response) {
+        return accountService.getAccount(email)
     }
 
     /**

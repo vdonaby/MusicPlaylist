@@ -1,8 +1,6 @@
 package com.msse.web.repository
 
 import com.msse.web.domain.Playlist
-import com.msse.web.domain.Songs
-import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.PagingAndSortingRepository
 

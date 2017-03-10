@@ -34,9 +34,9 @@ class AccountService {
 
 
     //A2&A3
-    Account getAccount(String Email) {
+    Account getAccount(String email) {
 
-        Account account = accountRepository.findOne(Email)
+        //Account account = accountRepository.findOne(email)
         return accountRepository.save(account)
 
     }
