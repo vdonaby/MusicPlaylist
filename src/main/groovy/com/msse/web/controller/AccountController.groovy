@@ -27,7 +27,7 @@ import java.awt.print.Pageable
 @RestController
 /**
 -can be added.
-@RequestMapping ("/account") --why
+@RequestMapping ("/account")
 
 -Json file can be added as MediaType
  */
