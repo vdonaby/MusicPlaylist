@@ -6,6 +6,4 @@ import org.springframework.data.repository.CrudRepository
 /**
  * Created by z001hk8 on 2/11/17.
  */
-interface ArtistRepository extends CrudRepository<Artist, Long> {
-
-}
+interface ArtistRepository extends CrudRepository<Artist, Long> {}

@@ -7,6 +7,4 @@ import org.springframework.data.repository.CrudRepository
  * Created by z001hk8 on 2/8/17.
  */
 
-interface ReleaseRepository extends CrudRepository<Release, Long> {
-
-}
+interface ReleaseRepository extends CrudRepository<Release, Long> {}
