@@ -8,12 +8,8 @@ import org.springframework.data.repository.PagingAndSortingRepository
  A4: Returns the playlists for an Account and is sortable and pageable
  */
 
-//extending CrudRepository to PagingAndSortingRepository
-interface AccountRepository extends PagingAndSortingRepository<Account, Integer> {
+interface AccountRepository extends PagingAndSortingRepository<Account, Long> {
 
-   @Query("select a from Account a WHERE a.email =?1")
+    @Query("SELECT a from Account a WHERE a.email like ?1%")
     Account findByEmail(String email)
-
-
-
 }

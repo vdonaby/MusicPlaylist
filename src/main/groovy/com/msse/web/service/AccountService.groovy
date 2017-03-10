@@ -24,11 +24,8 @@ class AccountService {
     @Autowired
     AccountRepository accountRepository
 
-
     //A1
     Account addAccount(Account account) {
-
-
         return accountRepository.save(account)
     }
 
@@ -36,9 +33,15 @@ class AccountService {
     //A2&A3
     Account getAccount(String email) {
 
-        //Account account = accountRepository.findOne(email)
-        return accountRepository.save(account)
+        def account
 
+        try{
+            account = accountRepository.findByEmail(email)
+            System.out.println("Account returned from repo: " + account)
+        } catch(Exception e) {
+            System.out.println("Error message: " + e.getMessage())
+        }
+        return account
     }
 
 

@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import com.fasterxml.jackson.databind.ObjectMapper
+import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -17,6 +18,7 @@ import spock.lang.Specification
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AccountIntegrationTests extends Specification {
 
+    @Ignore
     def "get account"() {
         setup:
         def accountService = Mock(AccountService)
@@ -38,6 +40,7 @@ class AccountIntegrationTests extends Specification {
         1 * accountService.getAccount("user@gmail.com") >> account
     }
 
+    @Ignore
     def "post account"(){
         setup:
         def accountService = Mock(AccountService)
