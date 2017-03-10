@@ -45,7 +45,7 @@ class AccountService {
     //A4
 
     Page<Playlist> listAllPlayLists (Pageable pageable){
-        Page result = postRespository.findAll(request)
+        Page result = accountRepository.findAll(request)
         result
     }
 

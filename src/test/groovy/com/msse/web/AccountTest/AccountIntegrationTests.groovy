@@ -1,9 +1,12 @@
 package com.msse.web.AccountTest
 
+import com.msse.web.controller.AccountController
 import com.msse.web.domain.Account
 import com.msse.web.service.AccountService
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import com.fasterxml.jackson.databind.ObjectMapper
 import spock.lang.Specification
 
 /**
@@ -17,7 +20,7 @@ class AccountIntegrationTests extends Specification {
     def "get account"() {
         setup:
         def accountService = Mock(AccountService)
-        def accountController = new AccountController(accountService: accountService)
+        def accountController = new AccountController (accountService: accountService)
         def mockMvc = MockMvcBuilders.standaloneSetup(accountController).build()
 
         //check auto generated id if not, then added and getAccount(enter id here)

@@ -10,6 +10,6 @@ import org.springframework.data.repository.PagingAndSortingRepository
 //extending CrudRepository to PagingAndSortingRepository
 interface AccountRepository extends PagingAndSortingRepository<Account, Integer> {
 
-    Account<Account> findByEmail(String Email)
+    Account findByEmail(String Email)
 
 }
