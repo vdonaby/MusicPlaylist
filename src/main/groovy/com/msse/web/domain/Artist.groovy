@@ -1,6 +1,10 @@
 package com.msse.web.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import org.hibernate.proxy.LazyInitializer
+
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id

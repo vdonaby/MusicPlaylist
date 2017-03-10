@@ -19,7 +19,7 @@ class Songs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    String id
+    public Long id
 
     @NotNull
     String title

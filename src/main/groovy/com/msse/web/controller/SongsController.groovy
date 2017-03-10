@@ -1,5 +1,6 @@
 package com.msse.web.controller
 
+import com.msse.web.domain.Release
 import com.msse.web.domain.Songs
 import com.msse.web.repository.ArtistRepository
 import com.msse.web.repository.ReleaseRepository
@@ -34,6 +35,21 @@ class SongsController {
         artistRepository.save(song.release.artist)
         releaseRepository.save(song.release)
         return songsRepository.save(song)
+    }
+
+    @PostMapping("/song/releaseId/{releaseId}")
+    Release addSongToRelease(@RequestBody Songs song, @PathVariable Long releaseId) {
+
+        def release = releaseRepository.findOne(releaseId)
+        List<Songs> songs = new ArrayList<>();
+        songs.add(song)
+        release.songs.add(songs)
+        try {
+            release = releaseRepository.save(release)
+        } catch(Exception e) {
+            System.out.println("Error saving release to repository: " + e.getMessage())
+        }
+        return release
     }
 
     @GetMapping("/song/title/{songTitle}/artist/{artistName}")

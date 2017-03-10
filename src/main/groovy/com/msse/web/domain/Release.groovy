@@ -19,7 +19,7 @@ class Release {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    String id
+    Long id
 
     @NotNull
     String title

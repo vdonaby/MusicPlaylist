@@ -1,6 +1,7 @@
 package com.msse.web.controller
 
 import com.msse.web.domain.Artist
+import com.msse.web.domain.Playlist
 import com.msse.web.domain.Release
 import com.msse.web.domain.Songs
 import com.msse.web.repository.ArtistRepository
@@ -12,6 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
+import spock.lang.Ignore
 import spock.lang.Specification
 
 import java.time.LocalDate
@@ -83,5 +85,29 @@ class SongsControllerFunctionalTest extends Specification {
         actual.release.artist.name == artist.name
         actual.title == song.title
 
+    }
+
+    /*
+    Requirement S3
+     */
+    @Ignore
+    def "add a song to an existing release"() {
+
+        setup:
+        def artist = new Artist(name: 'Super Kid')
+        artistRepository.save(artist)
+        def release = new Release(title: 'OK Computer', artist: artist, type: 'ReleaseType.ALBUM')
+        release = releaseRepository.save(release)
+        def song = new Songs(title: 'Test Song', release: release)
+        song = songsRepository.save(song)
+
+        when:
+        ResponseEntity<Release> response = this.testRestTemplate.postForEntity("/song/releaseId/" + release.id, song, Release.class)
+
+        then:
+        response.statusCode == HttpStatus.OK
+        Release actualRelease = response.body
+        actualRelease.title == release.title
+        actualRelease.songs.id == song.id
     }
 }
