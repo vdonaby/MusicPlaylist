@@ -102,6 +102,8 @@ class PlaylistTest extends Specification {
     def 'saves a song to multiple playlist'() {
 
         given:
+        def account = new Account(email: 'multiplesongs@gmail.com', password: 'Password1', name: "Test Account")
+        accountRepository.save(account)
         def artist = new Artist(name: 'Super Kid')
         artistRepository.save(artist)
         def release = new Release(date: LocalDate.now(), title: 'OK Computer', artist: artist, type: 'ReleaseType.ALBUM')
@@ -110,8 +112,7 @@ class PlaylistTest extends Specification {
         def song = new Songs(title: 'Roger that', release: release)
         songsRepository.save(song)
         songs.add(song)
-        def account = new Account(email: 'multiplesongs@gmail.com', password: 'Password1', name: "Test Account")
-        accountRepository.save(account)
+
         def playlist1 = new Playlist(name: 'My Playlist 1', account: account, songs: songs)
         def playlist2 = new Playlist(name: 'My Playlist 2', account: account, songs: songs)
         def startingPlaylistCount = playlistRepository.count()

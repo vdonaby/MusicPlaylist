@@ -32,10 +32,11 @@ class Playlist {
     @NotNull
     @ManyToOne
     @JsonProperty("account")
-    Account Account
+    Account account
 
     @ManyToMany
     @JsonProperty("songs")
     List<Songs> songs
+
 
 }
