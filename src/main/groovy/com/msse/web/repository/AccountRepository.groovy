@@ -1,6 +1,7 @@
 package com.msse.web.repository
 
 import com.msse.web.domain.Account
+import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.PagingAndSortingRepository
 
 /**
@@ -10,6 +11,9 @@ import org.springframework.data.repository.PagingAndSortingRepository
 //extending CrudRepository to PagingAndSortingRepository
 interface AccountRepository extends PagingAndSortingRepository<Account, Integer> {
 
-    List <Account> findByEmail(String Email)
+   @Query("select a from Account a WHERE a.email =?1")
+    Account findByEmail(String email)
+
+
 
 }
