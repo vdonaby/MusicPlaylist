@@ -40,10 +40,12 @@ class SongsController {
     @PostMapping("/song/releaseId/{releaseId}")
     Release addSongToRelease(@RequestBody Songs song, @PathVariable Long releaseId) {
 
+        song = songsRepository.save(song)
         def release = releaseRepository.findOne(releaseId)
         List<Songs> songs = new ArrayList<>();
         songs.add(song)
-        release.songs.add(songs)
+        release.setSongs(songs)
+
         try {
             release = releaseRepository.save(release)
         } catch(Exception e) {

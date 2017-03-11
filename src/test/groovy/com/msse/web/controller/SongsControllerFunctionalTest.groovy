@@ -105,6 +105,6 @@ class SongsControllerFunctionalTest extends Specification {
         response.statusCode == HttpStatus.OK
         Release actualRelease = response.body
         actualRelease.title == release.title
-        actualRelease.songs.id == song.id
+        actualRelease.songs == song
     }
 }

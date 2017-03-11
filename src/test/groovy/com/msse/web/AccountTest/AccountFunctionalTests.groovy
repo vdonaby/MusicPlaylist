@@ -51,10 +51,27 @@ class AccountFunctionalTests extends Specification {
         actual.name == account.name
     }
 
-    /**
-     A2
-     does A2 include A1 since there is a response's type. or test te response error 400
-     HttpStatus.OK is 200 == means OK
+
+
+    /*A2
+    does A2 include A1 since there is a response's type. or test te response error 400
+    HttpStatus.OK is 200 == means OK
+    */
+    @Ignore
+    def "add account with invalid data"() {
+        setup:
+        def account = new Account(email: "user@gmail.com", password: "Pas", name: "User")
+        account = accountRepository.save(account)
+
+        when:
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.postForEntity("/account", account, Account.class)
+
+        then:
+        responseEntity.statusCode == HttpStatus.BAD_REQUEST
+    }
+
+    /*
+     A3
      */
 
     def "get account"() {
