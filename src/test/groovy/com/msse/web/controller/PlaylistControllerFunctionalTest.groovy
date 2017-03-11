@@ -18,16 +18,13 @@ import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-import java.awt.PageAttributes.MediaType
-import java.time.LocalDate
-
 /**
  * Created by z001hk8 on 3/5/17.
  */
 
 @ContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PlaylistControllerFunctionalTest extends Specification{
+class PlaylistControllerFunctionalTest extends Specification {
 
     @Autowired
     AccountRepository accountRepository
@@ -96,6 +93,5 @@ class PlaylistControllerFunctionalTest extends Specification{
         Playlist actual = response.body
         actual.name == myPlaylist.name
         actual.account.id == account.id
-//        actual.songs.id == mySong.id
     }
 }

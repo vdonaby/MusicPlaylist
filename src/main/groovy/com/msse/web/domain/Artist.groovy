@@ -1,12 +1,13 @@
 package com.msse.web.domain
 
+import javax.persistence.CascadeType
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.OneToMany
 import javax.validation.constraints.NotNull
-import java.beans.Transient
 
 /**
  * Created by z001hk8 on 2/7/17.
@@ -22,7 +23,7 @@ class Artist {
     @NotNull
     String name
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Release> releases
 
 }

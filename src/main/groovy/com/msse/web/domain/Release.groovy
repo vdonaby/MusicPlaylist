@@ -1,6 +1,8 @@
 package com.msse.web.domain
 
+import javax.persistence.CascadeType
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -19,12 +21,13 @@ class Release {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    String id
+    Long id
 
     @NotNull
     String title
 
-    @NotNull @ManyToOne
+    @NotNull
+    @ManyToOne
     Artist artist
 
     @NotNull
