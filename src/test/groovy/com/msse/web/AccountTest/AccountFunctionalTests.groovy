@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
 import spock.lang.Specification
-
-import java.awt.PageAttributes.MediaType
 /**
  A1: Receives JSON data to create an Account
  A2: Return an error response from the create Account endpoint if the account values are invalid
@@ -63,7 +61,7 @@ class AccountFunctionalTests extends Specification {
         accountRepository.save(account)
 
         when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.email , Account)
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.email, Account)
 
         then:
         responseEntity.statusCode == HttpStatus.OK
@@ -72,15 +70,14 @@ class AccountFunctionalTests extends Specification {
         actual.name == account.name
     }
 
-
     //A3
     /**
-    A3
+     A3
      modify it to data-driven test email or id
      */
 
     @Ignore
-    def "return account data based on email" () {
+    def "return account data based on email"() {
 
         setup:
         AccountRepository accountRepository = Mock(AccountRepository)
@@ -91,31 +88,43 @@ class AccountFunctionalTests extends Specification {
 
         then:
         1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
-        1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
-        result.name == "User"
-        result.name == "3!321"
+        //  1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
+        result.name == "User1"
+        // result.name == "User2"
 
     }
 
+    /**
 
-    //A4
-    //check if there is another way to test pageable and sortable
-    @Ignore
-    def "get playlist pageable and sortable"() {
+     check if there is another way to test pageable and sortable
+     //account/playlist?page=0&size=3&sort=createdDate,desc
+     // @Ignore
+     /** def "get playlist pageable and sortable"() {setup:
+     def account = new Account()
+     when:
+     (1..3).each{account = new Account(name:"account $it")}then:
+     accountRepository.save(account)}}
+     */
+
+///account/playlist?page=0&size=3&sort=createdDate,desc
+
+    def "return pageable and sortable playlist"() {
 
         setup:
-            def account = new Account()
-        when:
-            (1..3).each{
-            account = new Account(name:"User $it")}
-        then:
+        def account = new Account(email: "user22@gmail.com", password: "Password1", name: "User")
         accountRepository.save(account)
 
-        }
+        when:
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/playlist/{page}/{size}/{sort}" + account.email, Account)
+
+        then:
+        responseEntity.statusCode == HttpStatus.OK
+        Account actual = responseEntity.body
+        actual.email == account.email
+        actual.name == account.name
+        actual.size() == 3
+        actual.sort() ==
+
 
     }
-
-
-
-
 

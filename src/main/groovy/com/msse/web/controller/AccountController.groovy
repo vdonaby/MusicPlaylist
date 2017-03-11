@@ -15,23 +15,15 @@ import com.msse.web.service.AccountService
 import com.msse.web.service.PlaylistService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.client.RestTemplate
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 import javax.servlet.http.HttpServletResponse
+import javax.validation.ConstraintViolationException
 import java.awt.print.Pageable
 
 @RestController
-/**
--can be added.
-@RequestMapping ("/account")
-
--Json file can be added as MediaType
- */
 class AccountController {
 
 
@@ -45,17 +37,28 @@ class AccountController {
 
     //A1
     @PostMapping("/account")
-    Account addAccount(@RequestBody Account account) {
+    Account addAccount(@RequestBody Account account, HttpServletResponse response) {
+        try {
+            accountService.addAccount(account)
+            //ad account to the service
+
+        } catch(ConstraintViolationException ex) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST, ex.message)
+
+        }
+
         return accountService.addAccount(account)
+
     }
 
     /**
 
     Note for A1:
 
+     right
     @PostMapping("/account")
-     Account addAcount(@RequestBody Account account) {
-     return accountService.addAcount(account)
+     Account addAccount(@RequestBody Account account) {
+     return accountService.addAccount(account)
      }
 
      //A1
@@ -82,7 +85,7 @@ class AccountController {
     @GetMapping("/account/{email}")
     Account getAccount(@PathVariable String email) {
         def account = accountService.getAccount(email)
-        System.out.println("Account: " + account + " passssss " + account.password)
+        System.out.println("Account: " + account + " password " + account.password)
         return account
     }
 
@@ -108,18 +111,18 @@ class AccountController {
      */
 
 
-    //A4
-
-    @GetMapping("/account/playlist?page=0&size=3&sort=createdDate,desc")
     /** return playlist pageable and sortable
      */
+    //A4
+    ///account/playlist?page=0&size=3&sort=createdDate,desc
+    @GetMapping("/account/playlist")
     Page<Playlist> getPlayLists(Pageable request)
     {
         Page<Playlist> playList =  PlaylistService.getPlayLists(request)
         playList
     }
+ }
 
-}
 /**
  /**pass Pageable instance to Accountservice,
  which then pass it to AccountRepository
