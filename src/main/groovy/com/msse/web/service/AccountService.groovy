@@ -13,6 +13,7 @@ package com.msse.web.service
 import com.msse.web.domain.Account
 import com.msse.web.repository.AccountRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
@@ -30,7 +31,7 @@ class AccountService {
             accountRepository.save(account)
         } catch(ConstraintViolationException e) {
             throw e
-            return new ResponseEntity([error: e.message], e.statusCode)
+            return new ResponseEntity(HttpStatus.BAD_REQUEST, ex.message)
         }
 
     }
