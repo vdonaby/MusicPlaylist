@@ -1,7 +1,6 @@
 package com.msse.web.controller
 
 import com.msse.web.domain.Artist
-import com.msse.web.domain.Playlist
 import com.msse.web.domain.Release
 import com.msse.web.domain.Songs
 import com.msse.web.repository.ArtistRepository
@@ -15,8 +14,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
 import spock.lang.Specification
-
-import java.time.LocalDate
 
 /**
  * Created by z001hk8 on 3/9/17.
