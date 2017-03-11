@@ -10,6 +10,6 @@ import org.springframework.data.repository.PagingAndSortingRepository
 
 interface AccountRepository extends PagingAndSortingRepository<Account, Long> {
 
-    @Query("SELECT a from Account a WHERE a.email like ?1%")
-    Account findByEmail(String email)
+    @Query("SELECT a from Account a WHERE a.email like ?1% OR a.id like ?1%")
+    Account findByEmailorId(String emailOrId)
 }

@@ -11,12 +11,13 @@
 package com.msse.web.service
 
 import com.msse.web.domain.Account
-import com.msse.web.domain.Playlist
 import com.msse.web.repository.AccountRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+
+import javax.validation.ConstraintViolationException
 
 @Service
 class AccountService {
@@ -26,30 +27,19 @@ class AccountService {
 
     //A1
     Account addAccount(Account account) {
-        return accountRepository.save(account)
+        try {
+            accountRepository.save(account)
+        } catch(ConstraintViolationException e) {
+            throw e
+            return new ResponseEntity(HttpStatus.BAD_REQUEST, ex.message)
+        }
+
     }
 
 
     //A2&A3
-    Account getAccount(String email) {
-
-        def account
-
-        try{
-            account = accountRepository.findByEmail(email)
-            System.out.println("Account returned from repo: " + account)
-        } catch(Exception e) {
-            System.out.println("Error message: " + e.getMessage())
-        }
-        return account
-    }
-
-
-    //A4
-
-    Page<Playlist> listAllPlayLists (Pageable pageable){
-        Page result = accountRepository.findAll(request)
-        result
+    Account getAccount(String emailOrId) {
+        return accountRepository.findByEmailOrAccountId(accountOrId)
     }
 
 }
