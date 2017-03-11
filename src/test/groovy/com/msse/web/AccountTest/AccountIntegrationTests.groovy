@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import com.fasterxml.jackson.databind.ObjectMapper
 import spock.lang.Ignore
 import spock.lang.Specification
+import org.springframework.http.MediaType
 
 /**
  A6: Create integration tests for Account
