@@ -30,8 +30,8 @@ class AccountService {
         try {
             accountRepository.save(account)
         } catch(ConstraintViolationException e) {
-            throw e
-            return new ResponseEntity(HttpStatus.BAD_REQUEST, ex.message)
+            //throw e
+            return new ResponseEntity(HttpStatus.BAD_REQUEST, e.message)
         }
 
     }
@@ -39,7 +39,7 @@ class AccountService {
 
     //A2&A3
     Account getAccount(String emailOrId) {
-        return accountRepository.findByEmailOrAccountId(accountOrId)
+        return accountRepository.findByEmailOrAccountId(emailOrId)
     }
 
 }

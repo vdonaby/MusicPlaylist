@@ -1,6 +1,7 @@
 package com.msse.web.AccountTest
 
 import com.msse.web.domain.Account
+import com.msse.web.domain.Playlist
 import com.msse.web.repository.AccountRepository
 import com.msse.web.repository.PlaylistRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
 import spock.lang.Specification
+
+import java.awt.*
 /**
  A1: Receives JSON data to create an Account
  A2: Return an error response from the create Account endpoint if the account values are invalid
@@ -33,6 +36,8 @@ class AccountFunctionalTests extends Specification {
     @Autowired
     PlaylistRepository playlistRepository
 
+
+
     //A1
     def "add account with valid data"() {
         setup:
@@ -49,11 +54,8 @@ class AccountFunctionalTests extends Specification {
         actual.name == account.name
     }
 
-    /*A2
-    does A2 include A1 since there is a response's type. or test te response error 400
-    HttpStatus.OK is 200 == means OK
-    */
 
+    //A2
     @Ignore
     def "add account with invalid data"() {
         setup:
@@ -67,37 +69,45 @@ class AccountFunctionalTests extends Specification {
         responseEntity.statusCode == HttpStatus.BAD_REQUEST
     }
 
-    /*
-     A3
-     */
 
-    def "get account"() {
+    // A3
+    def "returns JSON data based on an account id or email"() {
         setup:
-        def account = new Account(email: "user22@gmail.com", password: "Password1", name: "User")
+        def account = new Account(email: "user@gmail.com")
         accountRepository.save(account)
 
         when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.email, Account.class)
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/", account, Account.class)
+        Account expect = responseEntity.body
 
         then:
-        responseEntity.statusCode == HttpStatus.OK
-        Account actual = responseEntity.body
-        actual.email == account.email
-        actual.name == account.name
+        responseEntity.statusCode == expected
+        expect.email == account.email
+        expect.id == account.id
+
+       /*
+       actual.email == account.email
+       actual.id == account.id*/
 
         where:
-        email | id | account.email | account.id
-        account.email | account.id | actual.id
+
+
+        expect.email       | account.email   | expect.id   | account.id  | expected
+        "user@gmail.com"   | account.email   | account.id  | account.id  | HttpStatus.OK
+        "nouser@gmail.com" | account.email   | '8888888'   | account.id  | HttpStatus.BAD_REQUEST
+        null | null        | account.email   | null        | account.id  | HttpStatus.BAD_REQUEST
+        "user@gmail.com"   | account.email   | '8888888'   | account.id  | HttpStatus.BAD_REQUEST
+        "nouser@gmail.com" | account.email   | account.id  | account.id  | HttpStatus.BAD_REQUEST
+
     }
 
     //A3
     /**
      A3
-     modify it to data-driven test email or id
+     data-driven: returns JSON data based on an account id or email
      */
-
-    @Ignore
-    def "return account data based on email"() {
+    /**
+    def "returns JSON data based on an account id or email"() {
 
         setup:
         AccountRepository accountRepository = Mock(AccountRepository)
@@ -113,7 +123,7 @@ class AccountFunctionalTests extends Specification {
         // result.name == "User2"
 
     }
-
+**/
     /**
 
      check if there is another way to test pageable and sortable
@@ -133,15 +143,19 @@ class AccountFunctionalTests extends Specification {
         setup:
         def account = new Account(email: "user22@gmail.com", password: "Password1", name: "User")
         accountRepository.save(account)
+        def page = 0
+        def size = 3
+        List<Playlist> accountPaylists = account.playlists.toSorted() as List
 
         when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/playlist/{page}/{size}/{sort}" + account.email, Account)
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/playlist/page/{size}/{sort}", account.playlists, Account)
 
         then:
         responseEntity.statusCode == HttpStatus.OK
         Account actual = responseEntity.body
-        actual.email == account.email
-        actual.name == account.name
+       // actual.page  == page
+       // actual.size == size
+        accountPaylists == account.playlists
 
     }
 

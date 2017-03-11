@@ -26,7 +26,7 @@ class AccountIntegrationTests extends Specification {
         def mockMvc = MockMvcBuilders.standaloneSetup(accountController).build()
 
         //check auto generated id if not, then added and getAccount(enter id here)
-        def account = new Account(Email: "user@gmail.com", password: "3!321", name: "User")
+        def account = new Account(Email: "user@gmail.com", password: "password1", name: "User")
 
         ObjectMapper mapper = ObjectMapper.newInstance()
 
@@ -48,7 +48,7 @@ class AccountIntegrationTests extends Specification {
         def mockMvc = MockMvcBuilders.standaloneSetup(accountController).build()
 
         //check auto generated id if not, then added and getAccount(enter id here)
-        def account = new Account(Email: "user@gmail.com", password: "3!321", name: "User")
+        def account = new Account(Email: "user@gmail.com", password: "password1", name: "User")
 
         ObjectMapper mapper = ObjectMapper.newInstance()
 

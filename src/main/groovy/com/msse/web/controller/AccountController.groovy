@@ -19,53 +19,41 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-import javax.servlet.http.HttpServletResponse
 import javax.validation.ConstraintViolationException
 import java.awt.print.Pageable
 
 @RestController
 class AccountController {
 
-
     //connect to AccountService for receiving Jason data
     @Autowired
     AccountService accountService
-    AccountController (AccountService accountService){
+
+    AccountController(AccountService accountService) {
         this.accountService = accountService
     }
 
-
-    //A1
+    //A1 and A2
+    //Account addAccount(@RequestBody Account account, HttpServletResponse response)
     @PostMapping("/account")
-    Account addAccount(@RequestBody Account account, HttpServletResponse response) {
+    Account addAccount(@RequestBody Account account) {
         try {
             accountService.addAccount(account)
-            //ad account to the service
-
-        } catch(ConstraintViolationException ex) {
+        } catch (ConstraintViolationException ex) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST, ex.message)
-
         }
-
         return accountService.addAccount(account)
-
     }
 
     /**
 
-    Note for A1:
-
-     right
-    @PostMapping("/account")
-     Account addAccount(@RequestBody Account account) {
-     return accountService.addAccount(account)
-     }
+     Note for A1:
 
      //A1
      /**Receives JSON data to create an Account
 
-     @PostMapping("/account")
-      ResponseEntity<Account> set() {
+     @PostMapping ( " / a c c o u n t " )
+      ResponseEntity < Account >  set() {
 
       Account account = new Account();
       account.setEmail("user@gmail.com");
@@ -75,19 +63,19 @@ class AccountController {
       //Using response entity class to modify response header
       return new ResponseEntity<Account>(account, HttpStatus.OK);
 
-
       }
      */
 
 
-    //A2 and A3
 
+    //A3
     @GetMapping("/account/{email}")
     Account getAccount(@PathVariable String email) {
         def account = accountService.getAccount(email)
-        System.out.println("Account: " + account + " password " + account.password)
+        System.out.println("name:" + account.name + "email: " + account.email + " password " + account.password)
         return account
     }
+
 
     /**
 
@@ -96,23 +84,17 @@ class AccountController {
      - add exception for invalid data 400 bad request
 
      - diff way:
-     // check which works better "try and catch" vs. throw
-     @GetMapping("/account")
-      Account getAccountData() {
-      try {
-      RestTemplate restTemplate = new RestTemplate()
-      Account account = restTemplate.getForObject("http://localhost:8080/static/accountData.json", Account.class)
+     @GetMapping("/account/{email}")
+      Account getAccount(@PathVariable String email, HttpServletResponse response) {
+      Account account = accountService.getAccount(email)
+      if (!account) {
+      response.setStatus(404)
+      }
       return account
       }
-      catch (HttpClientErrorException ex) {
-      return new ResponseEntity([error: ex.message], ex.statusCode)
-      }
-      }
-     */
+    */
 
 
-    /** return playlist pageable and sortable
-     */
     //A4
     ///account/playlist?page=0&size=3&sort=createdDate,desc
     @GetMapping("/account/playlist")
@@ -121,9 +103,10 @@ class AccountController {
         Page<Playlist> playList =  PlaylistService.getPlayLists(request)
         playList
     }
- }
 
-/**
+
+
+
  /**pass Pageable instance to Accountservice,
  which then pass it to AccountRepository
  check sorting lists
@@ -144,6 +127,7 @@ class AccountController {
   Page list(Pageable pageable) {
   return postService.listPosts(pageable)
   }
- */
 
 
+*/
+}
