@@ -20,21 +20,4 @@ class PlaylistService {
     Playlist addPlaylistService(Playlist playlist) {
         return playlistRepository.save(playlist)
     }
-
-
-
-    //A4
-        Page getPlayLists(Pageable request)
-        {
-            Page result =  PlaylistRepository.findAll(request)
-            result
-        }
-
-
-    /**
-     Page<Playlist> listAllPlayLists (Pageable pageable){
-     Page result = accountRepository.findAll(request)
-     result
-     }
-     */
 }

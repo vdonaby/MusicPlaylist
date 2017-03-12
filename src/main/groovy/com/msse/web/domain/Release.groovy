@@ -1,8 +1,6 @@
 package com.msse.web.domain
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import com.fasterxml.jackson.annotation.JsonIgnore
-
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.FetchType
