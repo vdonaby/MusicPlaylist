@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
+import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -50,6 +51,8 @@ class AccountFunctionalTests extends Specification {
     }
 
 
+
+
     //A2
     def "add account with invalid data"() {
         setup:
@@ -62,6 +65,33 @@ class AccountFunctionalTests extends Specification {
         responseEntity.statusCode == HttpStatus.BAD_REQUEST
     }
 
+    @Ignore //TODO make data driven test work
+    def "returns JSON data based on an account id or email"(String newEmail, String newId, String expected) {
+
+        setup:
+        def account = new Account(email: "user@gmail.com")
+        accountRepository.save(account)
+
+        when:
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account" + account.email + Account.class)
+        Account expect = responseEntity.body
+
+        then:
+        responseEntity.statusCode == expected
+        account.email == newEmail
+        account.id == newId
+
+        /*
+        actual.email == account.email
+        actual.id == account.id*/
+
+        where:
+        newEmail           | newId      | expected
+        "user@gmail.com"   | account.id | HttpStatus.OK
+        "nouser@gmail.com" | '8888888'  | HttpStatus.BAD_REQUEST
+        "user@gmail.com"   | '8888888'  | HttpStatus.BAD_REQUEST
+        "nouser@gmail.com" | account.id | HttpStatus.BAD_REQUEST
+    }
 
     // A3
     def "returns JSON data based on an account email"() {
@@ -97,6 +127,7 @@ class AccountFunctionalTests extends Specification {
 
     }
 
+    //A4
     def "return pageable and sortable playlist"() {
 
         setup:
