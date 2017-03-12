@@ -26,10 +26,6 @@ class AccountController {
     @Autowired
     AccountService accountService
 
-    AccountController(AccountService accountService) {
-        this.accountService = accountService
-    }
-
     //A1 and A2
     @PostMapping("/account")
     Account addAccount(@RequestBody Account account, HttpServletResponse response) {
