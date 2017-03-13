@@ -44,13 +44,16 @@ class SongsController {
         def release = releaseRepository.findOne(releaseId)
         List<Songs> songs = new ArrayList<>();
         songs.add(song)
-        release.setSongs(songs)
 
+        release.setSongs(songs)
+        System.out.println("&&&&&&&& " + release.songs)
         try {
             release = releaseRepository.save(release)
+             System.out.println("&&&&&&&& " + release.songs)
         } catch(Exception e) {
             System.out.println("Error saving release to repository: " + e.getMessage())
         }
+        System.out.println("&&&&&&&& " + release.getSongs())
         return release
     }
 

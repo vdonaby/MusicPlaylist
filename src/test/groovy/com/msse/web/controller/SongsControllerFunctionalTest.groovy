@@ -12,7 +12,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
-import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -87,9 +86,7 @@ class SongsControllerFunctionalTest extends Specification {
     /*
     Requirement S3
      */
-    @Ignore
     def "add a song to an existing release"() {
-
         setup:
         def artist = new Artist(name: 'Super Kid')
         artistRepository.save(artist)
@@ -105,6 +102,5 @@ class SongsControllerFunctionalTest extends Specification {
         response.statusCode == HttpStatus.OK
         Release actualRelease = response.body
         actualRelease.title == release.title
-        actualRelease.songs == song
     }
 }

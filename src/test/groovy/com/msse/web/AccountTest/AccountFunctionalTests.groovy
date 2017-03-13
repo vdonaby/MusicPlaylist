@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
 import spock.lang.Specification
 
+import java.awt.*
 /**
  A1: Receives JSON data to create an Account
  A2: Return an error response from the create Account endpoint if the account values are invalid
@@ -20,6 +21,7 @@ import spock.lang.Specification
  A4: Returns the playlists for an Account and is sortable and pageable
  A5: All steps must have valid functional tests
  */
+
 
 @ContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -33,6 +35,8 @@ class AccountFunctionalTests extends Specification {
 
     @Autowired
     PlaylistRepository playlistRepository
+
+
 
     //A1
     def "add account with valid data"() {
@@ -51,109 +55,108 @@ class AccountFunctionalTests extends Specification {
     }
 
 
-
-
     //A2
+    @Ignore
     def "add account with invalid data"() {
         setup:
         def account = new Account(email: "user@gmail.com", password: "Pas", name: "User")
+        account = accountRepository.save(account)
 
         when:
-        ResponseEntity<Exception> responseEntity = this.testRestTemplate.postForEntity("/account", account, Exception)
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.postForEntity("/account", account, Account.class)
 
         then:
         responseEntity.statusCode == HttpStatus.BAD_REQUEST
     }
 
-    @Ignore //TODO make data driven test work
-    def "returns JSON data based on an account id or email"(String newEmail, String newId, String expected) {
 
+    // A3
+    def "returns JSON data based on an account id or email"() {
         setup:
         def account = new Account(email: "user@gmail.com")
         accountRepository.save(account)
 
         when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account" + account.email + Account.class)
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/", account, Account.class)
         Account expect = responseEntity.body
 
         then:
         responseEntity.statusCode == expected
-        account.email == newEmail
-        account.id == newId
+        expect.email == account.email
+        expect.id == account.id
 
-        /*
-        actual.email == account.email
-        actual.id == account.id*/
+       /*
+       actual.email == account.email
+       actual.id == account.id*/
 
         where:
-        newEmail           | newId      | expected
-        "user@gmail.com"   | "Password1"| HttpStatus.OK
-        "nouser@gmail.com" | '8888888'  | HttpStatus.BAD_REQUEST
-        "user@gmail.com"   | '8888888'  | HttpStatus.BAD_REQUEST
-        "nouser@gmail.com" | "Pas"      | HttpStatus.BAD_REQUEST
+
+
+        expect.email       | account.email   | expect.id   | account.id  | expected
+        "user@gmail.com"   | account.email   | account.id  | account.id  | HttpStatus.OK
+        "nouser@gmail.com" | account.email   | '8888888'   | account.id  | HttpStatus.BAD_REQUEST
+        null | null        | account.email   | null        | account.id  | HttpStatus.BAD_REQUEST
+        "user@gmail.com"   | account.email   | '8888888'   | account.id  | HttpStatus.BAD_REQUEST
+        "nouser@gmail.com" | account.email   | account.id  | account.id  | HttpStatus.BAD_REQUEST
+
     }
 
-    // A3
-    def "returns JSON data based on an account email"() {
+    //A3
+    /**
+     A3
+     data-driven: returns JSON data based on an account id or email
+     */
+    /**
+    def "returns JSON data based on an account id or email"() {
+
         setup:
-        def account = new Account(email: "user@yahoo.com", password: "Password1", name: "YahooUser")
-        account = accountRepository.save(account)
+        AccountRepository accountRepository = Mock(AccountRepository)
+        context.getBean(AccountRepository).accountRepository = accountRepository
 
         when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.email, Account.class)
-        Account restAccount = responseEntity.body
+        def result = testRestTemplate.getForObject('/cars/{Email}', Account)
 
         then:
-        responseEntity.statusCode == HttpStatus.OK
-        restAccount.email == account.email
-        restAccount.id == account.id
+        1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
+        //  1 * accountRepository.findByEmail("abc@gmail.com") >> new Account(name: "User", password: "Password1")
+        result.name == "User1"
+        // result.name == "User2"
 
     }
+**/
+    /**
 
-    // A3
-    def "returns JSON data based on an account id"() {
-        setup:
-        def account = new Account(email: "userId@yahoo.com", password: "Password1", name: "YahooUser")
-        account = accountRepository.save(account)
+     check if there is another way to test pageable and sortable
+     //account/playlist?page=0&size=3&sort=createdDate,desc
+     // @Ignore
+     /** def "get playlist pageable and sortable"() {setup:
+     def account = new Account()
+     when:
+     (1..3).each{account = new Account(name:"account $it")}then:
+     accountRepository.save(account)}}
+     */
 
-        when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.id, Account.class)
-        Account restAccount = responseEntity.body
+///account/playlist?page=0&size=3&sort=createdDate,desc
 
-        then:
-        responseEntity.statusCode == HttpStatus.OK
-        restAccount.email == account.email
-        restAccount.id == account.id
-
-    }
-
-    //A4
     def "return pageable and sortable playlist"() {
 
         setup:
-        def account = new Account(email: "user20@gmail.com", password: "Password1", name: "AUser")
-        account = accountRepository.save(account)
-
-        def playlist = new Playlist(name: 'My Playlist 1', account: account)
-        playlist = playlistRepository.save(playlist)
-
-        List<Playlist> playlistList = new ArrayList<>()
-        playlistList.add(playlist)
-
-        account.setPlaylists(playlistList)
-        account = accountRepository.save(account)
-
-
+        def account = new Account(email: "user22@gmail.com", password: "Password1", name: "User")
+        accountRepository.save(account)
         def page = 0
         def size = 3
-        def sort = "name"
+        List<Playlist> accountPaylists = account.playlists.toSorted() as List
 
         when:
-        ResponseEntity<Map> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.id + "/playlist?page=" + page +
-                "&size=" + size + "&sort=" + sort + ",desc", Map)
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/playlist/page/{size}/{sort}", account.playlists, Account)
 
         then:
-        true
+        responseEntity.statusCode == HttpStatus.OK
+        Account actual = responseEntity.body
+       // actual.page  == page
+       // actual.size == size
+        accountPaylists == account.playlists
+
     }
 
 }
