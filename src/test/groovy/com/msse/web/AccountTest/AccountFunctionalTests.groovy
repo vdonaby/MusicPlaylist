@@ -83,7 +83,7 @@ class AccountFunctionalTests extends Specification {
 
 
         where:
-        newEmail           | newPassword      | newName         | status
+        newEmail                     | newPassword      | newName         | status
         "userDataDriven@gmail.com"   | "Password1"      | "Test Name"     | HttpStatus.OK
 
     }
