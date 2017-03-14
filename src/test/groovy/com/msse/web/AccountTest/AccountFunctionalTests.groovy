@@ -66,32 +66,26 @@ class AccountFunctionalTests extends Specification {
         responseEntity.statusCode == HttpStatus.BAD_REQUEST
     }
 
-    @Ignore //TODO make data driven test work
-    def "returns JSON data based on an account id or email"(String newEmail, String newId, String expected) {
+    def "returns JSON data based on an account id or email"(String newEmail, String newPassword, String newName, HttpStatus status) {
 
         setup:
-        def account = new Account(email: "user@gmail.com")
+        def account = new Account(email: newEmail.toString(), password: newPassword.toString(), name: newName.toString())
         accountRepository.save(account)
 
         when:
-        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account" + account.email + Account.class)
-        Account expect = responseEntity.body
+        ResponseEntity<Account> responseEntity = this.testRestTemplate.getForEntity("/account/" + account.email, Account.class)
 
         then:
-        responseEntity.statusCode == expected
-        account.email == newEmail
-        account.id == newId
-
-        /*
+        responseEntity.statusCode == status
+        Account actual = responseEntity.body
         actual.email == account.email
-        actual.id == account.id*/
+        actual.name == account.name
+
 
         where:
-        newEmail           | newId      | expected
-        "user@gmail.com"   | "Password1"| HttpStatus.OK
-        "nouser@gmail.com" | '8888888'  | HttpStatus.BAD_REQUEST
-        "user@gmail.com"   | '8888888'  | HttpStatus.BAD_REQUEST
-        "nouser@gmail.com" | "Pas"      | HttpStatus.BAD_REQUEST
+        newEmail           | newPassword      | newName         | status
+        "userDataDriven@gmail.com"   | "Password1"      | "Test Name"     | HttpStatus.OK
+
     }
 
     // A3
