@@ -20,5 +20,4 @@ interface AccountRepository extends PagingAndSortingRepository<Account, String> 
       Account findByEmailOrAccountId(String emailOrId, Pageable)
      */
 
-
 }

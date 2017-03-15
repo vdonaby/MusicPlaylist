@@ -57,7 +57,7 @@ class AccountController {
      @GetMapping("/account/{accountId}/playlist/{page}/{size})
 
       Page getPlayLists(@PathVariable String accountId, @PathVariable Integer page,
-      @PathVariable Integer size, Sort sort, Pageable request)
+     @PathVariable Integer size, Sort sort, Pageable request)
       {
       return accountService.getPlayLists(accountId, page, size, sort, request)
       }

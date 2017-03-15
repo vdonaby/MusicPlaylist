@@ -60,16 +60,16 @@ class AccountService {
 
         /**
 
-          Page getPlayLists(String accountId, Integer page, Integer size, Sort sort, Pageable request) {
+         Page getPlayLists(String accountId, Integer page, Integer size, Sort sort, Pageable request) {
 
-          //1- find a playlist for an account
-          Page result = accountRepository.findByEmailOrAccountId(accountId, request)
+         //1- find a playlist for an account
+         Page result = accountRepository.findByEmailOrAccountId(accountId, request)
 
-          if (result)
+         if (result)
          {
-           // 2- Returns the playlists for this Account and is sortable and pageable
-           // how we customize page, size and sort
-            return result.getContent().getSort()
+         // 2- Returns the playlists for this Account and is sortable and pageable
+         // how we customize page, size and sort
+         return result.getContent().getSort()
          }
          */
 
