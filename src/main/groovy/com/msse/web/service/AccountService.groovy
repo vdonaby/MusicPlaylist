@@ -11,13 +11,14 @@
 package com.msse.web.service
 
 import com.msse.web.domain.Account
-import com.msse.web.domain.Playlist
 import com.msse.web.repository.AccountRepository
 import com.msse.web.repository.PlaylistRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+//import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+
 import javax.validation.ConstraintViolationException
 
 @Service
@@ -44,15 +45,34 @@ class AccountService {
         return accountRepository.findByEmailOrAccountId(emailOrId)
     }
 
-    //A4
-    Page getPlayLists(Pageable request, String accountId) {
 
-        Page result = accountRepository.findAll(request)
+
+    //A4
+    Page getPlayLists(String accountId, Pageable request) {
+
+        Page result = accountRepository.findByEmailOrAccountId(accountId, request.getPageNumber(), request.getPageSize())
 //        for(Account account: result.getContent()) {
 //            if(!account.id == accountId) {
 //                result.content.remove()
 //            }
 //        }
         return result
+
+        /**
+
+          Page getPlayLists(String accountId, Integer page, Integer size, Sort sort, Pageable request) {
+
+          //1- find a playlist for an account
+          Page result = accountRepository.findByEmailOrAccountId(accountId, request)
+
+          if (result)
+         {
+           // 2- Returns the playlists for this Account and is sortable and pageable
+           // how we customize page, size and sort
+            return result.getContent().getSort()
+         }
+         */
+
+
     }
 }

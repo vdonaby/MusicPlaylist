@@ -14,6 +14,7 @@ import com.msse.web.service.AccountService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+//import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 
 import javax.servlet.http.HttpServletResponse
@@ -45,10 +46,21 @@ class AccountController {
     }
 
     //A4
-    ///account/playlist?page=0&size=3&sort=createdDate,desc
+    ///account/playlist?page=0&size=3&sort=createdDate,ASC
     @GetMapping("/account/{accountId}/playlist")
     Page getPlayLists(@PathVariable String accountId, Pageable request)
     {
         return accountService.getPlayLists(request, accountId)
     }
+
+    /**
+     @GetMapping("/account/{accountId}/playlist/{page}/{size})
+
+      Page getPlayLists(@PathVariable String accountId, @PathVariable Integer page,
+      @PathVariable Integer size, Sort sort, Pageable request)
+      {
+      return accountService.getPlayLists(accountId, page, size, sort, request)
+      }
+
+     */
 }
