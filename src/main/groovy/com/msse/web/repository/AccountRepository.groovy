@@ -13,7 +13,7 @@ interface AccountRepository extends PagingAndSortingRepository<Account, String> 
 
     //   Page result = accountRepository.findByEmailOrAccountId(accountId, request.getPageNumber(), request.getPageSize())
     @Query("SELECT a from Account a WHERE a.email like ?1% OR a.id like ?1%")
-    Account findByEmailOrAccountId(String emailOrId, Integer page, Integer size)
+    Account findByEmailOrAccountId(String emailOrId)
 
     /**
      @Query("SELECT a from PlayList a WHERE a.email like ?1% OR a.id like ?1%")
