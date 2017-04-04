@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>MusicApp</h2>
+      <p>Please search by song, artist or album</p>
+    </div>
+  </div>
+</div>
+
+<form name="musicApp" novalidate>
+  <div class="well">
+    <div class="form-group">
+      <label>Song</label>
+      <input name="song name" class="form-control"
+             ng-model="data.musicApp.song" required />
+      <span class="error" ng-show="musicApp.name.$error.required">
+                Please enter a song name
+            </span>
+
+    </div>
+
+    <div class="form-group">
+      <label>Artist</label>
+      <input name="street" class="form-control"
+             ng-model="data.musicApp.artist" required />
+      <span class="error" ng-show="musicApp.street.$error.required">
+                Please enter an artist name
+            </span>
+    </div>
+
+    <div class="form-group">
+      <label>Album</label>
+      <input name="city" class="form-control"
+             ng-model="data.musicApp.album" required />
+      <span class="error" ng-show="shippingForm.city.$error.required">
+                Please enter an album name
+            </span>
+    </div>
+
+    <div class="text-center">
+      <button ng-disabled="musicApp.$invalid"
+              ng-click="sendOrder(data.musicApp)"
+              class="btn btn-primary">
+        Search
+      </button>
+    </div>
+  </div>
+</form>
