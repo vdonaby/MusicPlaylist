@@ -69,7 +69,7 @@ class AccountFunctionalTests extends Specification {
     def "returns JSON data based on an account id or email"(String newEmail, String newPassword, String newName, HttpStatus status) {
 
         setup:
-        def account = new Account(email: newEmail.toString(), password: newPassword.toString(), name: newName.toString())
+        def account = new Account(email: newEmail, password: newPassword, name: newName)
         accountRepository.save(account)
 
         when:
