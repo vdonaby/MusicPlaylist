@@ -14,7 +14,7 @@
       <label>Song</label>
       <input name="song name" class="form-control"
              ng-model="data.musicApp.song" required />
-      <span class="error" ng-show="musicApp.name.$error.required">
+      <span class="error" ng-show="musicApp.song.$error.required">
                 Please enter a song name
             </span>
 
@@ -24,7 +24,7 @@
       <label>Artist</label>
       <input name="street" class="form-control"
              ng-model="data.musicApp.artist" required />
-      <span class="error" ng-show="musicApp.street.$error.required">
+      <span class="error" ng-show="musicApp.artist.$error.required">
                 Please enter an artist name
             </span>
     </div>
@@ -33,14 +33,14 @@
       <label>Album</label>
       <input name="city" class="form-control"
              ng-model="data.musicApp.album" required />
-      <span class="error" ng-show="shippingForm.city.$error.required">
+      <span class="error" ng-show="musicApp.album.$error.required">
                 Please enter an album name
             </span>
     </div>
 
     <div class="text-center">
       <button ng-disabled="musicApp.$invalid"
-              ng-click="sendOrder(data.musicApp)"
+              ng-click="submit(data.musicApp)"
               class="btn btn-primary">
         Search
       </button>
