@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { AlbumComponent } from './album/album.component';
-import { SongComponent } from './song/song.component';
-import { ArtistComponent } from './artist/artist.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AlbumComponent } from './components/album/album.component';
+import { SongComponent } from './components/song/song.component';
+import { ArtistComponent } from './components/artist/artist.component';
+import {SpotifyService} from './services/spotify.service';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ArtistComponent } from './artist/artist.component';
     HeaderComponent,
     AlbumComponent,
     SongComponent,
-    ArtistComponent
+    ArtistComponent,
+    SpotifyService,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
