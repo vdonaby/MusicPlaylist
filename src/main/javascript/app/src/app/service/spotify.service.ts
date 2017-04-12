@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http} from "@angular/http";
+import {Http, Response} from "@angular/http";
 
 @Injectable()
 export class SpotifyService {
@@ -12,7 +12,12 @@ export class SpotifyService {
 
   getArtist(id: String) {
     this.artistUrl = 'https://api.spotify.com/v1/artists/' + id;
-    return this.http.get(this.artistUrl).map(res => res.json());
+    return this.http
+      .get(this.artistUrl);
   }
 
+  private extractData(res: Response) {
+    let body = res.json().results;
+    return body || {};
+  }
 }

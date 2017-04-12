@@ -1,12 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { SpotifyService } from './spotify.service';
-import {Http, Response, ResponseOptions} from "@angular/http";
+import {Http, Response, ResponseOptions, ConnectionBackend, HttpModule} from "@angular/http";
 import {Observable} from "rxjs";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('SpotifyService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SpotifyService]
+      imports: [HttpModule],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [SpotifyService, Http, ConnectionBackend]
     });
   });
 
