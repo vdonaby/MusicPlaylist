@@ -23,3 +23,12 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+node_modules
+jspm_packages
+npm-debug.log
+debug.log
+_test-output
+_temp
+/node/
+/src/main/resources/static
