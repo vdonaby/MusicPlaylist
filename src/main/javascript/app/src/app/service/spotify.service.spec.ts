@@ -13,21 +13,21 @@ describe('SpotifyService', () => {
     });
   });
 
-  it('should create service...', inject([SpotifyService], (service: SpotifyService) => {
-    expect(service).toBeTruthy();
-  }));
-
-  it('should get artist...', inject([SpotifyService], (service: SpotifyService) => {
-    let http = TestBed.get(Http);
-    let response = new Response(new ResponseOptions());
-    let responseJson = spyOn(response, 'json').and.returnValue.toString()
-
-    let httpGet = spyOn(http, 'get').and.returnValue(Observable.of(response));
-    service.getArtist("1vCWHaC5f2uS3yhpwWbIA6");
-
-    expect(httpGet).toHaveBeenCalledWith("https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6");
-    expect(httpGet).toHaveBeenCalledTimes(1);
-
-  }));
+  // it('should create service...', inject([SpotifyService], (service: SpotifyService) => {
+  //   expect(service).toBeTruthy();
+  // }));
+  //
+  // it('should get artist...', inject([SpotifyService], (service: SpotifyService) => {
+  //   let http = TestBed.get(Http);
+  //   let response = new Response(new ResponseOptions());
+  //   let responseJson = spyOn(response, 'json').and.returnValue.toString()
+  //
+  //   let httpGet = spyOn(http, 'get').and.returnValue(Observable.of(response));
+  //   service.getArtist("1vCWHaC5f2uS3yhpwWbIA6");
+  //
+  //   expect(httpGet).toHaveBeenCalledWith("https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6");
+  //   expect(httpGet).toHaveBeenCalledTimes(1);
+  //
+  // }));
 
 });

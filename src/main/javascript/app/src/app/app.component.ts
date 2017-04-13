@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SpotifyService} from "./service/spotify.service";
+import {Artist} from "./component/artist/artist";
+import {Album} from "./component/album/album";
+import {Song} from "./component/song/song";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,37 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+
+  artistId: string;
+  albumId: string;
+  songId: string;
+
+  artist: Artist;
+  album: Album;
+  song: Song;
+
+  constructor(
+    private spotifyService: SpotifyService
+  ) { }
+
+  searchArtist() {
+    this.spotifyService.getArtist(this.artistId)
+      .subscribe(artist => {
+        this.artist = artist;
+      })
+  }
+
+  searchAlbum() {
+    this.spotifyService.getAlbum(this.albumId)
+      .subscribe(album => {
+        this.album = album;
+      })
+  }
+
+  searchSong() {
+    this.spotifyService.getSong(this.songId)
+      .subscribe(song => {
+        this.song = song;
+      })
+  }
 }

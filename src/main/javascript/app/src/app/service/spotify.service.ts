@@ -2,30 +2,44 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 @Injectable()
 export class SpotifyService {
 
-  private artistUrl: string
 
   constructor(private http: Http) {
-
   }
 
   getArtist(id: String) {
-    this.artistUrl = 'https://api.spotify.com/v1/artists/' + id;
+    let artistUrl = 'https://api.spotify.com/v1/artists/' + id;
     return this.http
-      .get(this.artistUrl)
-      .map(this.extractData)
+      .get(artistUrl)
+      .map(res => res.json())
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
-    let body = res.json().results;
-    return body || {};
+  getAlbum(id: String) {
+    let albumUrl = 'https://api.spotify.com/v1/albums/' + id;
+    return this.http
+      .get(albumUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getSong(name: String) {
+    let songUrl = 'https://api.spotify.com/v1/search?q=' + name + '&type=track';
+    console.log('****** ' + songUrl)
+    return this.http
+      .get(songUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
     let errMsg: string;
+    console.log("error mapping response")
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);

@@ -6,11 +6,15 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {SpotifyService} from "./service/spotify.service";
 import { ArtistComponent } from './component/artist/artist.component';
+import { AlbumComponent } from './component/album/album.component';
+import { SongComponent } from './component/song/song.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArtistComponent
+    ArtistComponent,
+    AlbumComponent,
+    SongComponent
   ],
   imports: [
     BrowserModule,

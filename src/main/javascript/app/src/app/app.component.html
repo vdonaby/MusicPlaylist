@@ -1,8 +1,50 @@
-<h1>
-  {{title}}
-</h1>
-<label>Search for song, artist or album:</label>
-<input name="search">
-<button>Search</button>
+<label>Search by artist:</label>
+<form>
+  <div class="form-group">
+    <input type="text" name="artistId" [(ngModel)]="artistId" (keyup)="searchArtist()">
+  </div>
+</form>
 
+<label>Search by album:</label>
+<form>
+  <div class="form-group">
+    <input type="text" name="albumId" [(ngModel)]="albumId" (keyup)="searchAlbum()">
+  </div>
+</form>
 
+<label>Search by song:</label>
+<form>
+  <div class="form-group">
+    <input type="text" name="songId" [(ngModel)]="songId" (keyup)="searchSong()">
+  </div>
+</form>
+
+<h1>{{artistName}}</h1>
+<div *ngIf="artist">
+  <h1>Artist name: {{this.artist.name}}</h1>
+  <div *ngIf ="this.artist.images.length > 0">
+      <img class="artist-thumb img-circle" src="{{this.artist.images[0].url}}">
+  </div>
+</div>
+
+<h1>{{albumName}}</h1>
+<div *ngIf="album">
+  <div *ngIf ="this.album.artists.length > 0">
+    <h1>Artist name: {{this.album.artists[0].name}}</h1>
+  </div>
+  <h1>Album name: {{this.album.name}}</h1>
+
+  <div *ngIf ="this.album.images.length > 0">
+    <img class="album-thumb img-circle" src="{{this.album.images[0].url}}">
+  </div>
+</div>
+
+<h1>{{songName}}</h1>
+<div *ngIf="song">
+  <!--<div *ngIf ="this.song.tracks.items > 0">-->
+    <!--<h1>Artist name: {{this.song.tracks.items[0].album.name}}</h1>-->
+  <!--</div>-->
+  {{song.tracks.items[0].name}}
+  <!--<h1>Album name: {{this.song.album.name}}</h1>-->
+  <!--<h1>Song title: {{this.song.name}}</h1>-->
+</div>
