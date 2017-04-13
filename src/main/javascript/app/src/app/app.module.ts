@@ -5,10 +5,12 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {SpotifyService} from "./service/spotify.service";
+import { ArtistComponent } from './component/artist/artist.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,
