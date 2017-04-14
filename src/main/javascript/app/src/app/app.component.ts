@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from "./service/spotify.service";
-import {Artist} from "./component/artist/artist";
-import {Album} from "./component/album/album";
-import {Song} from "./component/song/song";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,9 +14,9 @@ export class AppComponent {
   albumId: string;
   songId: string;
 
-  artist: Artist;
-  album: Album;
-  song: Song;
+  artist: any;
+  album: any;
+  song: any;
 
   constructor(
     private spotifyService: SpotifyService,

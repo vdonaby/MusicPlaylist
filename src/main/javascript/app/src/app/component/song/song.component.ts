@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import {SpotifyService} from "../../service/spotify.service";
-import {Album} from "../album/album";
 
 @Component({
   selector: 'app-song',
@@ -11,7 +10,7 @@ import {Album} from "../album/album";
 export class SongComponent implements OnInit {
 
   id: string;
-  album: Album;
+  album: any;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
