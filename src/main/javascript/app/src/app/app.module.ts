@@ -8,6 +8,7 @@ import {SpotifyService} from "./service/spotify.service";
 import { ArtistComponent } from './component/artist/artist.component';
 import { AlbumComponent } from './component/album/album.component';
 import { SongComponent } from './component/song/song.component';
+import {routing} from "./app.routing";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SongComponent } from './component/song/song.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
   providers: [SpotifyService],
   bootstrap: [AppComponent]

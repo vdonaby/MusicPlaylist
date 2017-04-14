@@ -45,6 +45,9 @@
     <!--<h1>Artist name: {{this.song.tracks.items[0].album.name}}</h1>-->
   <!--</div>-->
   {{song.tracks.items[0].name}}
+  <hr><a [routerLink]="['/track']">Song</a><hr>
+  <router-outlet></router-outlet>
+  <!--<button (click)="onNavigate()">Song</button>-->
   <!--<h1>Album name: {{this.song.album.name}}</h1>-->
   <!--<h1>Song title: {{this.song.name}}</h1>-->
 </div>

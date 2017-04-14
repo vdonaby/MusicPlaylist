@@ -3,11 +3,13 @@ import {SpotifyService} from "./service/spotify.service";
 import {Artist} from "./component/artist/artist";
 import {Album} from "./component/album/album";
 import {Song} from "./component/song/song";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  // directives: [ROUTER_DIRECTIVES]
 })
 export class AppComponent {
 
@@ -20,7 +22,8 @@ export class AppComponent {
   song: Song;
 
   constructor(
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private router: Router
   ) { }
 
   searchArtist() {
@@ -43,4 +46,8 @@ export class AppComponent {
         this.song = song;
       })
   }
+
+  // onNavigate() {
+  //   this.router.navigate(['track']);
+  // }
 }
