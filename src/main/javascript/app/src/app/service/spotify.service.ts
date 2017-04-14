@@ -22,6 +22,7 @@ export class SpotifyService {
 
   getAlbum(id: String) {
     let albumUrl = 'https://api.spotify.com/v1/albums/' + id;
+    console.log('****** ' + albumUrl)
     return this.http
       .get(albumUrl)
       .map(res => res.json())

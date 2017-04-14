@@ -25,6 +25,9 @@
   <div *ngIf ="this.artist.images.length > 0">
       <img class="artist-thumb img-circle" src="{{this.artist.images[0].url}}">
   </div>
+  <a *ngFor="let art of this.artist.genres">
+    <h1>Genres: {{art}}</h1>
+  </a>
 </div>
 
 <h1>{{albumName}}</h1>
@@ -40,14 +43,11 @@
 </div>
 
 <h1>{{songName}}</h1>
+
 <div *ngIf="song">
-  <!--<div *ngIf ="this.song.tracks.items > 0">-->
-    <!--<h1>Artist name: {{this.song.tracks.items[0].album.name}}</h1>-->
-  <!--</div>-->
-  {{song.tracks.items[0].name}}
-  <hr><a [routerLink]="['/track']">Song</a><hr>
-  <router-outlet></router-outlet>
-  <!--<button (click)="onNavigate()">Song</button>-->
-  <!--<h1>Album name: {{this.song.album.name}}</h1>-->
-  <!--<h1>Song title: {{this.song.name}}</h1>-->
+  <a *ngFor="let detail of this.song.tracks.items">
+    <h1>Song name: {{detail.name}}</h1>
+    <h1><hr><a [routerLink]="['/track', detail.album.id]">Song Link</a></h1>
+    <router-outlet></router-outlet>
+  </a>
 </div>

@@ -4,7 +4,7 @@ import {AppComponent} from "./app.component";
 import {SongComponent} from "./component/song/song.component";
 
 const APP_ROUTES: Routes = [
-  { path: 'track', component: SongComponent},
+  { path: 'track/:id', component: SongComponent},
   { path: '', component: AppComponent }
 ]
 
