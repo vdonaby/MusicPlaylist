@@ -1,3 +1,4 @@
+
 package com.msse.web.functional
 
 import org.hamcrest.core.StringContains
@@ -21,7 +22,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Ignore
 
-class ArtistGebSpec extends Specification {
+class SerachGebSpec extends Specification {
 
     @Autowired
     RestTemplate restTemplate
@@ -38,12 +39,47 @@ class ArtistGebSpec extends Specification {
         mockServer.expect(requestTo(new StringContains("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6.json"))).andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
         when:
-        def responseEntity = testRestTemplate.exchange("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6", HttpMethod.GET, getAuthorizedHttpEntity(), Map)
+        def responseEntity = testRestTemplate.exchange("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
 
         then:
         mockServer.verify()
         responseEntity.body == [:]
         responseEntity.statusCode == HttpStatus.OK
     }
+
+    def "get albums"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("/v1/albums/0sNOF9WDwhWunNAHPD3Baj.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("/v1/albums/0sNOF9WDwhWunNAHPD3Baj", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.OK
+    }
+
+    def "get song"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("v1/search?q=abba&type=track.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("v1/search?q=abba&type=track", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.OK
+    }
+
+
 
 }
