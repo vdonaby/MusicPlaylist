@@ -16,7 +16,6 @@ environments {
         driver = { new ChromeDriver() }
     }
 
-    //baseUrl = "http://localhost:${port}"
 }
 
 

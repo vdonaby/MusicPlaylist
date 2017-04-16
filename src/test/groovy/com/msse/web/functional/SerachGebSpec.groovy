@@ -48,7 +48,7 @@ class SerachGebSpec extends Specification {
         responseEntity.statusCode == HttpStatus.OK
     }
 
-    def "get albums"() {
+    def "get album"() {
         setup:
         mockServer = MockRestServiceServer.createServer(restTemplate)
 
