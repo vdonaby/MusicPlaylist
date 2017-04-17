@@ -10,8 +10,8 @@ waiting {
 
 environments {
 
-    // run via “./gradlew chromeTest”
-    // See: http://code.google.com/p/selenium/wiki/ChromeDriver
+    // run via “./gradlew test”
+
     chrome
             {
         driver = { new ChromeDriver() }
