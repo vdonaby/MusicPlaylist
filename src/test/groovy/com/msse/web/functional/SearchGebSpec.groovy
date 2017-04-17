@@ -1,4 +1,3 @@
-
 package com.msse.web.functional
 
 import org.hamcrest.core.StringContains
@@ -22,7 +21,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Ignore
 
-class SerachGebSpec extends Specification {
+class SearchGebSpec extends Specification {
 
     @Autowired
     RestTemplate restTemplate
