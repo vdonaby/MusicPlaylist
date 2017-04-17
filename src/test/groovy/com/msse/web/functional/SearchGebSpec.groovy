@@ -47,6 +47,55 @@ class SearchGebSpec extends Specification {
         responseEntity.statusCode == HttpStatus.OK
     }
 
+    def "get artist - server errors out"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.INTERNAL_SERVER_ERROR
+    }
+
+    def "get artist - bad request"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("/v1/artists/1vCWHaC5f2uS3yhpwWbIA6", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.BAD_REQUEST
+    }
+
+
+    def "get album - server errors out"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("/v1/albums/0sNOF9WDwhWunNAHPD3Baj.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("/v1/albums/0sNOF9WDwhWunNAHPD3Baj", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.INTERNAL_SERVER_ERROR
+    }
+
     def "get album"() {
         setup:
         mockServer = MockRestServiceServer.createServer(restTemplate)
@@ -62,6 +111,23 @@ class SearchGebSpec extends Specification {
         responseEntity.body == [:]
         responseEntity.statusCode == HttpStatus.OK
     }
+
+    def "get album - bad request"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("/v1/albums/0sNOF9WDwhWunNAHPD3Baj.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("/v1/albums/0sNOF9WDwhWunNAHPD3Baj", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.BAD_REQUEST
+    }
+
 
     def "get song"() {
         setup:
@@ -79,6 +145,40 @@ class SearchGebSpec extends Specification {
         responseEntity.statusCode == HttpStatus.OK
     }
 
+
+    def "get song - server errors out"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("v1/search?q=abba&type=track.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("v1/search?q=abba&type=track", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.INTERNAL_SERVER_ERROR
+    }
+
+
+
+    def "get song - bad request"() {
+        setup:
+        mockServer = MockRestServiceServer.createServer(restTemplate)
+
+        mockServer.expect(requestTo(new StringContains("v1/search?q=abba&type=track.json"))).andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{}", MediaType.APPLICATION_JSON_UTF8))
+        when:
+        def responseEntity = testRestTemplate.exchange("v1/search?q=abba&type=track", HttpMethod.GET,
+                getAuthorizedHttpEntity(), Map)
+
+        then:
+        mockServer.verify()
+        responseEntity.body == [:]
+        responseEntity.statusCode == HttpStatus.BAD_REQUEST
+    }
 
 
 }
