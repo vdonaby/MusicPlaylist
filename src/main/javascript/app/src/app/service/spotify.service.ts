@@ -12,16 +12,16 @@ export class SpotifyService {
   constructor(private http: Http) {
   }
 
-  getArtist(id: String) {
-    let artistUrl = 'https://api.spotify.com/v1/artists/' + id;
+  getArtist(name: String) {
+    let artistUrl = 'https://api.spotify.com/v1/search?q=' + name + '&type=artist';
     return this.http
       .get(artistUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getAlbum(id: String) {
-    let albumUrl = 'https://api.spotify.com/v1/albums/' + id;
+  getAlbum(name: String) {
+    let albumUrl = 'https://api.spotify.com/v1/search?q=' + name + '&type=album';
     console.log('****** ' + albumUrl)
     return this.http
       .get(albumUrl)
