@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router, ActivatedRoute} from "@angular/router";
+import {SpotifyService} from "../../service/spotify.service";
 
 @Component({
   selector: 'app-album',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlbumComponent implements OnInit {
 
-  constructor() { }
+  href: string;
+  album: any;
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private spotifyService: SpotifyService
+  ) {
+    this.href = activatedRoute.snapshot.params['href'];
+  }
 
   ngOnInit() {
+    this.spotifyService.getAlbumDetails(this.href)
+      .subscribe(album => {
+        this.album = album;
+        console.log("******** service is being called")
+      })
+
   }
 
 }

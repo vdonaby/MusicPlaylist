@@ -12,10 +12,11 @@ export class SongComponent implements OnInit {
   id: string;
   album: any;
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private spotifyService: SpotifyService) {
-
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private spotifyService: SpotifyService
+  ) {
     this.id = activatedRoute.snapshot.params['id'];
   }
 

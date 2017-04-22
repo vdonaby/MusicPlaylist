@@ -38,6 +38,16 @@ export class SpotifyService {
       .catch(this.handleError);
   }
 
+  getAlbumDetails(url: string) {
+    let albumIdUrl = url;
+    console.log('****** ' + url)
+    return this.http
+      .get(albumIdUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+
+  }
+
   private handleError (error: Response | any) {
     let errMsg: string;
     console.log("error mapping response")

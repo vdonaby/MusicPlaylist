@@ -5,10 +5,10 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   artistId: string;
   albumId: string;
@@ -22,6 +22,10 @@ export class AppComponent {
     private spotifyService: SpotifyService,
     private router: Router
   ) { }
+
+  ngOnInit() {
+
+  }
 
   searchArtist() {
     this.spotifyService.getArtist(this.artistId)
