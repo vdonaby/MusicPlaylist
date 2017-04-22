@@ -10,42 +10,17 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit {
 
-  artistId: string;
-  albumId: string;
-  songId: string;
-
-  artist: any;
-  album: any;
-  song: any;
-
   constructor(
-    private spotifyService: SpotifyService,
-    private router: Router
   ) { }
 
   ngOnInit() {
 
   }
 
-  searchArtist() {
-    this.spotifyService.getArtist(this.artistId)
-      .subscribe(artist => {
-        this.artist = artist;
-      })
-  }
 
-  searchAlbum() {
-    this.spotifyService.getAlbum(this.albumId)
-      .subscribe(album => {
-        this.album = album;
-      })
-  }
 
-  searchSong() {
-    this.spotifyService.getSong(this.songId)
-      .subscribe(song => {
-        this.song = song;
-      })
-  }
+
+
+
 
 }

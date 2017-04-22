@@ -12,6 +12,8 @@ export class AlbumComponent implements OnInit {
   href: string;
   album: any;
 
+  albumId: string;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -27,6 +29,13 @@ export class AlbumComponent implements OnInit {
         console.log("******** service is being called")
       })
 
+  }
+
+  searchAlbum() {
+    this.spotifyService.getAlbum(this.albumId)
+      .subscribe(album => {
+        this.album = album;
+      })
   }
 
 }

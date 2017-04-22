@@ -12,6 +12,9 @@ export class SongComponent implements OnInit {
   id: string;
   album: any;
 
+  songId: string;
+  song: any;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -21,10 +24,17 @@ export class SongComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spotifyService.getAlbum(this.id)
-      .subscribe(album => {
-        this.album = album;
-        console.log("******** service is being called")
+    // this.spotifyService.getAlbum(this.id)
+    //   .subscribe(album => {
+    //     this.album = album;
+    //     console.log("******** service is being called")
+    //   })
+  }
+
+  searchSong() {
+    this.spotifyService.getSong(this.songId)
+      .subscribe(song => {
+        this.song = song;
       })
   }
 
