@@ -1,6 +1,5 @@
 
 import {Routes, RouterModule} from "@angular/router";
-import {AppComponent} from "./app.component";
 import {SongComponent} from "./component/song/song.component";
 import {AlbumComponent} from "./component/album/album.component";
 
