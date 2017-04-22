@@ -4,18 +4,11 @@
 
 <div *ngIf="album">
 
-  <div *ngIf ="this.album.artists.length > 0">
-    <h1>Artist name: {{this.album.artists[0].name}}</h1>
+  <div *ngIf ="this.album.albums.items[0].artists.length > 0">
+    <h1>Artist name: {{this.album.albums.items[0].artists[0].name}}</h1>
   </div>
-  <h1>Album name: {{this.album.name}}</h1>
-  <div *ngIf ="this.album.images.length > 0">
-    <img class="album-thumb img-circle" src="{{this.album.images[0].url}}">
+  <h1>Album name: {{this.album.albums.items[0].name}}</h1>
+  <div *ngIf ="this.album.albums.items[0].images.length > 0">
+    <img class="album-thumb img-circle" src="{{this.album.albums.items[0].images[0].url}}">
   </div>
-  <!--<h4 *ngIf="this.album.tracks.items > 0"><span *ngFor="let new of album.tracks.items">{{new.name}}</span></h4>-->
-  <a *ngFor="let track of this.album.tracks.items">
-    <h1>Track name: {{track.name}}</h1>
-    <h1>Track number: {{track.track_number}}</h1>
-    <h1>Track duration (ms): {{track.duration_ms}}</h1>
-  </a>
-  <h1>Release year: {{this.album.release_date}}</h1>
 </div>

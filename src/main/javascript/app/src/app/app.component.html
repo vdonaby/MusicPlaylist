@@ -32,6 +32,7 @@
   <a *ngFor="let art of this.artist.artists.items[0].genres">
     <h1>Genres: {{art}}</h1>
   </a>
+  <h1>Number of followers: {{this.artist.artists.items[0].followers.total}}</h1>
 </div>
 
 <h1>{{albumName}}</h1>
@@ -50,7 +51,7 @@
 <div *ngIf="song">
   <a *ngFor="let detail of this.song.tracks.items">
     <h1>Song name: {{detail.name}}</h1>
-    <h1><hr><a [routerLink]="['/track', detail.album.id]">Song Link</a></h1>
+    <h1><hr><a [routerLink]="['/track', detail.album.name]">Song Link</a></h1>
     <router-outlet></router-outlet>
   </a>
 </div>
