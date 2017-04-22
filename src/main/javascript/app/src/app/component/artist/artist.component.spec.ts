@@ -15,15 +15,6 @@ describe('ArtistComponent', () => {
     fixture = TestBed.createComponent(ArtistComponent);
     component = fixture.componentInstance;
   });
-   /**   .compileComponents();
-  }));
-
- beforeEach(() => {
-    fixture = TestBed.createComponent(ArtistComponent);
-   component = fixture.componentInstance;
-   fixture.detectChanges();
-  });
-    */
    //select the target component and the toBeDefined method to do the test
  //it("artist is defined", () => {expect(component).toBeDefined()});
 
