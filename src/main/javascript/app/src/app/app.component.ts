@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from "./service/spotify.service";
-import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-root',
