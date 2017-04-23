@@ -1,0 +1,20 @@
+<p>
+  Album details:
+</p>
+
+<div *ngIf="album">
+
+  <div *ngIf ="this.album.artists.length > 0">
+    <h1>Artist name: {{this.album.artists[0].name}}</h1>
+  </div>
+  <h1>Album name: {{this.album.name}}</h1>
+  <div *ngIf ="this.album.images.length > 0">
+    <img class="album-thumb img-circle" src="{{this.album.images[0].url}}">
+  </div>
+  <a *ngFor="let tracks of this.album.tracks.items">
+    <h1>Track number: {{tracks.track_number}}</h1>
+    <h1>Track name: {{tracks.name}}</h1>
+    <h1>Duration: {{tracks.duration_ms}}</h1>
+  </a>
+  <h1>Release date: {{this.album.release_date}}</h1>
+</div>

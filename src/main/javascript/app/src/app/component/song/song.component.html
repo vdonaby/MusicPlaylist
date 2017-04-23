@@ -1,14 +1,19 @@
-<p>
-  Song details:
-</p>
-
-<div *ngIf="album">
-
-  <div *ngIf ="this.album.albums.items[0].artists.length > 0">
-    <h1>Artist name: {{this.album.albums.items[0].artists[0].name}}</h1>
+<label>Search by song:</label>
+<form>
+  <div class="form-group">
+    <input type="text" name="songId" [(ngModel)]="songId" (keyup)="searchSong()">
   </div>
-  <h1>Album name: {{this.album.albums.items[0].name}}</h1>
-  <div *ngIf ="this.album.albums.items[0].images.length > 0">
-    <img class="album-thumb img-circle" src="{{this.album.albums.items[0].images[0].url}}">
-  </div>
+</form>
+
+
+<h1>{{songName}}</h1>
+
+<div *ngIf="song">
+  <a *ngFor="let detail of this.song.tracks.items">
+    <h1>Song name: {{detail.name}}</h1>
+    <h1><hr><a [routerLink]="['/albumDetails', detail.album.href]">Song Link</a></h1>
+    <router-outlet></router-outlet>
+  </a>
 </div>
+
+

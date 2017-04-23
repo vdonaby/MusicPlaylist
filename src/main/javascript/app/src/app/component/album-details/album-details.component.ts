@@ -3,16 +3,14 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {SpotifyService} from "../../service/spotify.service";
 
 @Component({
-  selector: 'app-album',
-  templateUrl: './album.component.html',
-  styleUrls: ['./album.component.css']
+  selector: 'app-album-details',
+  templateUrl: './album-details.component.html',
+  styleUrls: ['./album-details.component.css']
 })
-export class AlbumComponent implements OnInit {
+export class AlbumDetailsComponent implements OnInit {
 
   href: string;
   album: any;
-
-  albumId: string;
 
   constructor(
     private router: Router,
@@ -26,16 +24,6 @@ export class AlbumComponent implements OnInit {
     this.spotifyService.getAlbumDetails(this.href)
       .subscribe(album => {
         this.album = album;
-        console.log("******** service is being called")
-      })
-
-  }
-
-  searchAlbum() {
-    this.spotifyService.getAlbum(this.albumId)
-      .subscribe(album => {
-        this.album = album;
       })
   }
-
 }

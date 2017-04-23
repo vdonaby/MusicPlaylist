@@ -1,13 +1,9 @@
-<label>Search by album:</label>
-<form>
-  <div class="form-group">
-    <input type="text" name="albumId" [(ngModel)]="albumId" (keyup)="searchAlbum()">
-  </div>
-</form>
+<p>
+  Song details:
+</p>
 
-
-<h1>{{albumName}}</h1>
 <div *ngIf="album">
+
   <div *ngIf ="this.album.albums.items[0].artists.length > 0">
     <h1>Artist name: {{this.album.albums.items[0].artists[0].name}}</h1>
   </div>
@@ -15,9 +11,4 @@
   <div *ngIf ="this.album.albums.items[0].images.length > 0">
     <img class="album-thumb img-circle" src="{{this.album.albums.items[0].images[0].url}}">
   </div>
-  <h1><hr><a [routerLink]="['/albumDetails', this.album.albums.items[0].href]">Album details</a></h1>
-  <router-outlet></router-outlet>
 </div>
-
-
-
