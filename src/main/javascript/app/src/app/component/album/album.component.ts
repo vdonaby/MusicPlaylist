@@ -23,12 +23,6 @@ export class AlbumComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spotifyService.getAlbumDetails(this.href)
-      .subscribe(album => {
-        this.album = album;
-        console.log("******** service is being called")
-      })
-
   }
 
   searchAlbum() {
