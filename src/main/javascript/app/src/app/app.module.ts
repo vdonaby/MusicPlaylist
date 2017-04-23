@@ -9,13 +9,17 @@ import { ArtistComponent } from './component/artist/artist.component';
 import { AlbumComponent } from './component/album/album.component';
 import { SongComponent } from './component/song/song.component';
 import {routing} from "./app.routing";
+import { AlbumDetailsComponent } from './component/album-details/album-details.component';
+import { SongDetailsComponent } from './component/song-details/song-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArtistComponent,
     AlbumComponent,
-    SongComponent
+    SongComponent,
+    AlbumDetailsComponent,
+    SongDetailsComponent
   ],
   imports: [
     BrowserModule,
