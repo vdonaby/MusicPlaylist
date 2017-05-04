@@ -71,7 +71,7 @@ node {
 	npmWorkDir = file("${project.buildDir}/src/main/javascript/app")
 }
 
-npm_run_test.dependsOn npmInstall
+npm_run_test.dependsOn npm_install
 npm_run_build.dependsOn npm_run_test
 
 processResources.dependsOn npm_run_build
