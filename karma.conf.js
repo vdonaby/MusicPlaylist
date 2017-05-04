@@ -13,13 +13,14 @@ module.exports = function (config) {
       require('@angular/cli/plugins/karma')
     ],
     client:{
+      captureConsole: true,
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
-      { pattern: './src/test.ts', watched: false }
+      { pattern: './src/main/javascript/test.ts', watched: false }
     ],
     preprocessors: {
-      './src/test.ts': ['@angular/cli']
+      './src/main/javascript/test.ts': ['@angular/cli']
     },
     mime: {
       'text/x-typescript': ['ts','tsx']
