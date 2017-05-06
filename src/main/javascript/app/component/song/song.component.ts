@@ -24,11 +24,7 @@ export class SongComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.spotifyService.getAlbum(this.id)
-    //   .subscribe(album => {
-    //     this.album = album;
-    //     console.log("******** service is being called")
-    //   })
+
   }
 
   searchSong() {
