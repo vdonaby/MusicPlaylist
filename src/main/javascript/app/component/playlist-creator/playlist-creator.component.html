@@ -1,3 +1,40 @@
-<p>
-  Playlist has been created!
-</p>
+<!-- First: create a playlist -->
+
+<!--<div *ngIf="!playlistCreated" #form="ngForm" novalidate
+     (ngSubmit)="submitPlaylist(form)" class="m-a-1">
+     <div class="form-group">
+         <label> Name </label>
+         <input class="form-control" #name="ngModel" name="name"
+                [(ngModel)] = "name" required />
+     </div>
+</div> -->
+
+<form (ngSubmit)="submitPlaylist(playlistId)">
+    <div class="form-group">
+        <input type="text" name="playlistId" [(ngModel)]="playlistId">
+    </div>
+
+    <div class = "text-xs-center">
+        <button class=" btn btn-primary" type="submit"> Create New Playlist</button>
+    </div>
+</form>
+
+
+<!-- simple template for creating a playlist
+
+
+<form novalidate #form="ngForm">
+
+    <div class="form-group">
+        <label> Playlist Name </label>
+        <input class="form-control" name="name"/>
+
+        <button type= "submit" class="btn btn-primary" (click) = "createPlaylist(name)">
+
+            Create playlist
+        </button>
+
+    </div>
+
+</form>
+-->

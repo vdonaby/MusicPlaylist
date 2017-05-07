@@ -11,6 +11,11 @@ import { SongComponent } from './component/song/song.component';
 import {routing} from "./app.routing";
 import { AlbumDetailsComponent } from './component/album-details/album-details.component';
 import { SongDetailsComponent } from './component/song-details/song-details.component';
+import { PlaylistCreatorComponent } from './component/playlist-creator/playlist-creator.component';
+import { PlaylistSongComponent } from './component/playlist-song/playlist-song.component';
+import { SearchComponent } from './search/search.component';
+import { PlaylistDetailComponent } from './component/playlist-detail/playlist-detail.component';
+import { AddSongComponent } from './component/add-song/add-song.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,11 @@ import { SongDetailsComponent } from './component/song-details/song-details.comp
     AlbumComponent,
     SongComponent,
     AlbumDetailsComponent,
-    SongDetailsComponent
+    SongDetailsComponent,
+    PlaylistCreatorComponent,
+    PlaylistSongComponent,
+    PlaylistDetailComponent,
+    AddSongComponent
   ],
   imports: [
     BrowserModule,

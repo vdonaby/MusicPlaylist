@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from "@angular/http";
+import {Http, Response, RequestOptions, Headers} from "@angular/http";
 import {Observable} from "rxjs";
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {Playlist} from "../component/playlist-creator/playlist-creater.model";
 
 @Injectable()
 export class SpotifyService {
@@ -42,11 +43,33 @@ export class SpotifyService {
     let albumIdUrl = url;
     console.log('****** ' + url)
     return this.http
-      .get(albumIdUrl)
-      .map(res => res.json())
-      .catch(this.handleError);
+        .get(albumIdUrl)
+        .map(res => res.json())
+        .catch(this.handleError);
 
   }
+
+  createPlaylist(playListBody: string) {
+    console.log('calling playlist creator****** ')
+    let headers = new Headers({'Content-Type': 'application/json' }); // ... Set content type to JSON
+    let options = new RequestOptions({ headers: headers}); // Create a request option
+    return this.http
+        .post('/playlist', playListBody, options)
+        .map(res => res.json())
+        .catch(this.handleError);
+
+  }
+
+  /**
+ save a playlist
+   not forget to add playlist model to
+   */
+  savePlaylist(playlist: Playlist): Observable<Playlist>{
+    console.log(JSON.stringify(playlist));
+    return Observable.from([playlist])
+
+  }
+
 
   private handleError (error: Response | any) {
     let errMsg: string;
