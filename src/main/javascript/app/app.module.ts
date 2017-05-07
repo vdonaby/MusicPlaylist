@@ -11,6 +11,12 @@ import { SongComponent } from './component/song/song.component';
 import {routing} from "./app.routing";
 import { AlbumDetailsComponent } from './component/album-details/album-details.component';
 import { SongDetailsComponent } from './component/song-details/song-details.component';
+import { PlaylistCreatorComponent } from './component/playlist-creator/playlist-creator.component';
+import { PlaylistSongComponent } from './component/playlist-song/playlist-song.component';
+import { PlaylistDetailComponent } from './component/playlist-detail/playlist-detail.component';
+import { AddSongComponent } from './component/add-song/add-song.component';
+import {UserService} from "./service/user.service";
+//import {UserRegisterComponent} from "./component/user/user-register/user-register.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +25,12 @@ import { SongDetailsComponent } from './component/song-details/song-details.comp
     AlbumComponent,
     SongComponent,
     AlbumDetailsComponent,
-    SongDetailsComponent
+    SongDetailsComponent,
+    PlaylistCreatorComponent,
+    PlaylistSongComponent,
+    PlaylistDetailComponent,
+    AddSongComponent,
+    //UserRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +38,7 @@ import { SongDetailsComponent } from './component/song-details/song-details.comp
     HttpModule,
     routing
   ],
-  providers: [SpotifyService],
+  providers: [SpotifyService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
