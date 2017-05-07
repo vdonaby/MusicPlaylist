@@ -62,17 +62,28 @@ export class PlaylistCreatorComponent implements OnInit {
   constructor(userService: UserService,private router: Router) {
     this.userService = userService;
   }
-  submitPlaylist(form: NgForm){
-    //this.submitted= true;
-    if (form.valid) {
-      console.log("************* " + this.model.Name)
-      // this.userService.create(this.model)
-      //     .subscribe(data => {
-      //       this.router.navigate(['/playlist']);
-      //     });
-      this.router.navigate(['/addSong']);
 
-    }
+  // submitPlaylist(form: NgForm){
+  //   //this.submitted= true;
+  //   if (form.valid) {
+  //     console.log("************* " + this.model.Name)
+  //     // this.userService.create(this.model)
+  //     //     .subscribe(data => {
+  //     //       this.router.navigate(['/playlist']);
+  //     //     });
+  //     this.router.navigate(['/addSong']);
+  //
+  //   }
+  // }
+
+  savePlaylist() {
+    console.log("************* " + this.model.Name)
+    // this.userService.create(this.model)
+    //     .subscribe(data => {
+    //       this.router.navigate(['/playlist']);
+    //     });
+    this.router.navigate(['/addSong']);
+
   }
 
 

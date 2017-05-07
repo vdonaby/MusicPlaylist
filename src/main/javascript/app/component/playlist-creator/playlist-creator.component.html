@@ -9,19 +9,40 @@
      </div>
 </div> -->
 
-<form (ngSubmit)="submitPlaylist(playlistId)">
+<!--<form (ngSubmit)="savePlaylist()()">
     <div class="form-group">
         <input type="text" name="playlistId" [(ngModel)]="playlistId">
     </div>
 
     <div class = "text-xs-center">
-        <button class=" btn btn-primary" type="submit" [routerLink]="['/song']"> Create New Playlist</button>
+        <button class=" btn btn-primary" type="submit" [routerLink]="['/addSong']"> Create New Playlist</button>
 
     </div>
+</form> -->
+<div class="well col-md-5 col-md-offset-3">
+    <label>Playlist Name</label>
+<form name="form" (ngSubmit)="savePlaylist()" #f="ngForm" novalidate>
+    <!--<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Name.valid }"> -->
+    <div class="form-group" >
+        <!--<input type="text" id="Name" class="form-control" name="Name" [(ngModel)]="model.Name"
+               #firstName="ngModel" required maxlength="10"/> -->
+        <input type="text" id="Name" class="form-control"
+               name="Name" [(ngModel)]="model.Name"
+               #firstName="ngModel" required maxlength="10"/>
+    </div>
+
+    <div class = "text-xs-center">
+        <button class="btn primary" type = "submit"> Create Playlist </button>
+    </div>
+
+
 </form>
-
-
+</div>
 <router-outlet></router-outlet>
+
+
+
+
 
 <!-- simple template for creating a playlist
 

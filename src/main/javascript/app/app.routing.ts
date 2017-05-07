@@ -7,6 +7,7 @@ import {AlbumDetailsComponent} from "./component/album-details/album-details.com
 import {PlaylistCreatorComponent} from "./component/playlist-creator/playlist-creator.component";
 import {AppComponent} from "./app.component";
 import {PlaylistDetailComponent} from "./component/playlist-detail/playlist-detail.component";
+import {AddSongComponent} from "./component/add-song/add-song.component";
 
 
 const APP_ROUTES: Routes = [
@@ -16,7 +17,7 @@ const APP_ROUTES: Routes = [
   {path: 'song', component: SongComponent},
   {path: 'albumDetails/:href', component: AlbumDetailsComponent},
   //{path: 'user/playlist/:name', component: PlaylistCreatorComponent},
-  //{path: 'adduser', component: UserRegisterComponent}
+  {path: 'addSong', component: AddSongComponent},
   {path: 'createPlaylist', component: PlaylistCreatorComponent}
 
   /** suggested routes
