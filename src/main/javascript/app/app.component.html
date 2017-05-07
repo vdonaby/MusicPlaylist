@@ -1,15 +1,69 @@
 
-<h1><hr><a [routerLink]="['/album']">Search by Album</a></h1>
+<!--<h1><hr><a [routerLink]="['/album']">Search by Album</a></h1>-->
+<!--<router-outlet></router-outlet>-->
+
+<!--<h1><hr><a [routerLink]="['/artist']">Search by Artist</a></h1>-->
+<!--<router-outlet></router-outlet>-->
+
+<!--<h1><hr><a [routerLink]="['/song']">Search by Song</a></h1>-->
+<!--<router-outlet></router-outlet>-->
+
+
+<div class="well col-md-5 col-md-offset-3">
+    <h2>Add User</h2>
+    <!--<form name="form" (ngSubmit)="f.form.valid && saveUser()" #f="ngForm" novalidate> -->
+    <form name="form" (ngSubmit)="saveUser()" #f="ngForm" novalidate>
+        <!--<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Name.valid }"> -->
+        <div class="form-group" >
+        <label for="Name">Name</label>
+            <!--<input type="text" id="Name" class="form-control" name="Name" [(ngModel)]="model.Name"
+                   #firstName="ngModel" required maxlength="10"/> -->
+            <input type="text" id="Name" class="form-control"
+                   name="Name" [(ngModel)]="model.Name"
+                   #firstName="ngModel" required maxlength="10"/>
+
+            <!--<div *ngIf="(Name.errors?.required && !Name?.errors?.minlength) && (!Name.pristine || f.submitted)"-->
+                 <!--class="alert alert-danger">-->
+                <!--name is required-->
+            <!--</div>-->
+
+            <!--<div *ngIf="!Name.valid && !Name.pristine"-->
+                 <!--class="alert alert-danger">-->
+                <!--name is required-->
+            <!--</div>-->
+
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required maxlength="40"/>
+            <div *ngIf="(email.errors?.required && !email?.errors?.minlength) && (!email.pristine || f.submitted)"
+                 class="alert alert-danger">
+                email is required
+            </div>
+
+            <div *ngIf="!email.valid && !email.pristine"
+                 class="alert alert-danger">
+                email is required
+            </div>
+        </div>
+
+        <div class = "form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required maxlength="8"/>
+            <div *ngIf="(password.errors?.required && !password?.errors?.minlength) && (!password.pristine || f.submitted)"
+                 class="alert alert-danger">
+                password is required
+            </div>
+        </div>
+
+
+        <div class = "text-xs-center">
+            <button class="btn primary" type = "submit"> Login </button>
+        </div>
+    </form>
+</div>
+
 <router-outlet></router-outlet>
-
-<h1><hr><a [routerLink]="['/artist']">Search by Artist</a></h1>
-<router-outlet></router-outlet>
-
-<h1><hr><a [routerLink]="['/song']">Search by Song</a></h1>
-<router-outlet></router-outlet>
-
-
-
 
 
 

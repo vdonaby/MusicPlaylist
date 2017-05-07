@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { SpotifyService } from "../../service/spotify.service";
 import {Playlist} from "./playlist-creater.model";
 import {NgForm} from '@angular/forms';
 import {Http, Response} from '@angular/http';
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-playlist-creator',
@@ -18,7 +19,7 @@ export class PlaylistCreatorComponent implements OnInit {
   submitted: boolean = false;
   playlistCreated: boolean = false;
 
-  constructor(
+  /**constructor(
       private activatedRoute: ActivatedRoute,
       private spotifyService: SpotifyService,
       private http: Http
@@ -53,11 +54,23 @@ export class PlaylistCreatorComponent implements OnInit {
 
    */
 
+  ngOnInit() {}
 
+  userService : UserService;
+  model: any = {};
+
+  constructor(userService: UserService,private router: Router) {
+    this.userService = userService;
+  }
   submitPlaylist(form: NgForm){
     //this.submitted= true;
     if (form.valid) {
-      return this.http.post('user/playlist/', name).map((response: Response) => response.json());
+      console.log("************* " + this.model.Name)
+      // this.userService.create(this.model)
+      //     .subscribe(data => {
+      //       this.router.navigate(['/playlist']);
+      //     });
+      this.router.navigate(['/addSong']);
 
     }
   }
