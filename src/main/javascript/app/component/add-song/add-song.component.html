@@ -9,6 +9,9 @@
 
     <label>Song Name</label>
     <form>
+        <button type= "submit" class="btn btn-primary" (click) = "showPlaylist()" >
+            Show Playlist
+        </button>
         <div class="form-group">
             <input type="text" name="songId" [(ngModel)]="songId" (keyup)="searchSong()" class="form-control">
         </div>
@@ -26,3 +29,4 @@
     </div>
 </form>
 </div>
+<router-outlet></router-outlet>

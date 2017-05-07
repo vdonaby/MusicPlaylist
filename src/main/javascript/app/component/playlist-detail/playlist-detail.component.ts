@@ -11,4 +11,13 @@ export class PlaylistDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteSong(songName) {
+    console.log("hello" + songName)
+    // this.userService.create(this.model)
+    //     .subscribe(data => {
+    //       this.router.navigate(['/playlist']);
+    //     });
+
+  }
+
 }
