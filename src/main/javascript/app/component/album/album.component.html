@@ -1,8 +1,7 @@
+<div class="well col-md-5 col-md-offset-3">
 <label>Search by Album:</label>
 <form>
-  <div class="form-group">
-    <input type="text" name="albumId" [(ngModel)]="albumId" (keyup)="searchAlbum()">
-  </div>
+  <input type="text" name="albumId" [(ngModel)]="albumId" (keyup)="searchAlbum()" class="form-control">
 </form>
 
 
@@ -17,6 +16,7 @@
   </div>
   <h1><hr><a [routerLink]="['/albumDetails', this.album.albums.items[0].href]">Album details</a></h1>
   <router-outlet></router-outlet>
+</div>
 </div>
 
 

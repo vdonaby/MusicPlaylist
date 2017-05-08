@@ -7,11 +7,10 @@
         <!--<input class="form-control" name="name">-->
     <!--</div>-->
 
-    <label>Song Name</label>
+
+
     <form>
-        <button type= "submit" class="btn btn-primary" (click) = "showPlaylist()" >
-            Show Playlist
-        </button>
+        <label>Song Name</label>
         <div class="form-group">
             <input type="text" name="songId" [(ngModel)]="songId" (keyup)="searchSong()" class="form-control">
         </div>
@@ -23,11 +22,15 @@
         <a *ngFor="let detail of this.song.tracks.items">
             <h1>Song name: {{detail.name}}</h1>
             <!--artistName, releaseTitle, releaseType, songTitle-->
-            <button type= "submit" class="btn btn-primary" (click) = "saveSong(detail.artists[0].name, detail.name)">
-                Add
-            </button>
+            <div class = "text-xs-center">
+                <button type= "submit" class="btn primary" (click) = "saveSong(detail.artists[0].name, detail.name)"> Add Song </button>
+            </div>
         </a>
     </div>
+    <div class = "text-xs-center">
+        <button type= "submit" class="btn primary" (click) = "showPlaylist()" > Show Playlist </button>
+    </div>
+
 </form>
 </div>
 <router-outlet></router-outlet>
