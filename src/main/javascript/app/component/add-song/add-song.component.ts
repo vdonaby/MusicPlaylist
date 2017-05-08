@@ -22,6 +22,7 @@ export class AddSongComponent implements OnInit {
 
   songId: string;
   song: any;
+  playlist: any;
 
   constructor(
       userService: UserService,
@@ -39,10 +40,10 @@ export class AddSongComponent implements OnInit {
 
   saveSong(artistName, songTitle) {
     console.log("hello" + songTitle + " playlistName: " + this.playlistName)
-    this.http.post('/playlist/name/' + this.playlistName, {title: this.songTitle, release: {title: 'Release Title', artist: {name: this.artistName}, type: 'ReleaseType.ALBUM'}}).map((response: Response) => response.json())
-        .subscribe(data => {
-          this.router.navigate(['/PlaylistDetail]'])
-        });
+    this.http.post('/playlist/name/' + this.playlistName, {title: songTitle}).map((response: Response) => response.json())
+        .subscribe(playlist => {
+          this.playlist = playlist;
+        })
 
   }
 
@@ -59,7 +60,7 @@ export class AddSongComponent implements OnInit {
     //     .subscribe(data => {
     //       this.router.navigate(['/playlist']);
     //     });
-    this.router.navigate(['/PlaylistDetail']);
+    this.router.navigate(['/playlistDetail']);
 
   }
 

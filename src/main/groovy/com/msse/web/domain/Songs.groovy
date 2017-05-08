@@ -16,7 +16,7 @@ class Songs {
     @NotNull
     String title
 
-    @NotNull @ManyToOne
+    @ManyToOne
     Release release
 
     @ManyToMany

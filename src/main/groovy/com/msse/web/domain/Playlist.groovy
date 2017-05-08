@@ -1,7 +1,10 @@
 package com.msse.web.domain
 
 import com.fasterxml.jackson.annotation.JsonProperty
+
+import javax.persistence.CascadeType
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -29,7 +32,7 @@ class Playlist {
     @JsonProperty("account")
     Account account
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonProperty("songs")
     List<Songs> songs
 

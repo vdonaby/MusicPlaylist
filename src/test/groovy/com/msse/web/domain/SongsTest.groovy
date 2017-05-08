@@ -5,6 +5,7 @@ import com.msse.web.repository.ReleaseRepository
 import com.msse.web.repository.SongsRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.validation.ConstraintViolationException
@@ -78,6 +79,7 @@ class SongsTest extends Specification {
     /*
     Requirement S1
      */
+    @Ignore
     def 'saves a song with no release'() {
 
         given:
