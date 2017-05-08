@@ -55,12 +55,11 @@ export class AddSongComponent implements OnInit {
   }
 
   showPlaylist() {
-    console.log("************* " + this.model.Name)
     // this.userService.create(this.model)
     //     .subscribe(data => {
     //       this.router.navigate(['/playlist']);
     //     });
-    this.router.navigate(['/playlistDetail']);
+    this.router.navigate(['/playlistDetail', this.playlistName]);
 
   }
 

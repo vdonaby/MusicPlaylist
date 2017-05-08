@@ -6,6 +6,9 @@
   <thead>
   <tr>
     <th>Song Name</th>
+    <div *ngIf="playlist">
+      <h1>Song name: {{this.playlist}}</h1>
+    </div>
   </tr>
   </thead>
 

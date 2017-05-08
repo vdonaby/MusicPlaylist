@@ -17,7 +17,7 @@ const APP_ROUTES: Routes = [
   {path: 'albumDetails/:href', component: AlbumDetailsComponent},
   {path: 'addSong/:playlistName', component: AddSongComponent},
   {path: 'createPlaylist/:name/:email/:password', component: PlaylistCreatorComponent},
-  {path: 'playlistDetail', component: PlaylistDetailComponent}
+  {path: 'playlistDetail/:playlistName', component: PlaylistDetailComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
