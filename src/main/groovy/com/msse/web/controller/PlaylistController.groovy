@@ -46,6 +46,10 @@ class PlaylistController {
         return playlistRepository.save(playlist)
     }
     
-//    @GetMapping("playlist/{name}")
-//    Playlist getPlaylist(@RequestBody)
+    @GetMapping("/playlist/{name}")
+    Playlist getPlaylist(@PathVariable name) {
+        System.out.println("Requesting to find this song!!!! " + name)
+        return playlistRepository.findPlaylistWithMatchingName(name)
+    }
+
 }

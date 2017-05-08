@@ -115,4 +115,20 @@ class PlaylistControllerFunctionalTest extends Specification {
         actual.name == myPlaylist.name
         actual.account.id == account.id
     }
+
+    def "get a playlist"() {
+
+        setup:
+        //Account to add song to
+        def account = new Account(email: 'validplaylistNoRelease6@gmail.com', password: 'Password106', name: "New Test Account 26")
+        accountRepository.save(account)
+        def myPlaylist = new Playlist(name: 'myPlaylist6', account: account)
+        playlistRepository.save(myPlaylist)
+
+        when:
+        ResponseEntity<Playlist> response = this.testRestTemplate.getForEntity("/playlist/" + myPlaylist.name,  Playlist.class)
+
+        then:
+        response.statusCode == HttpStatus.OK
+    }
 }
