@@ -54,13 +54,29 @@ export class PlaylistCreatorComponent implements OnInit {
 
    */
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   userService : UserService;
   model: any = {};
 
-  constructor(userService: UserService,private router: Router) {
+  userName: string;
+  email: string;
+  password: string;
+
+
+
+  constructor(
+      userService: UserService,
+      private router: Router,
+      private activatedRoute: ActivatedRoute,
+      private http: Http
+  ) {
     this.userService = userService;
+    this.userName = activatedRoute.snapshot.params['name'];
+    this.email = activatedRoute.snapshot.params['email'];
+    this.password = activatedRoute.snapshot.params['password'];
   }
 
   // submitPlaylist(form: NgForm){
@@ -77,20 +93,16 @@ export class PlaylistCreatorComponent implements OnInit {
   // }
 
   savePlaylist() {
-    console.log("************* " + this.model.Name)
-    // this.userService.create(this.model)
-    //     .subscribe(data => {
-    //       this.router.navigate(['/playlist']);
-    //     });
-    this.router.navigate(['/addSong']);
+    console.log("************* user name: " + this.userName + " email: " + this.email + " password: " + this.password + " playlist name: " + this.model.Name)
+
+    //create a new playlsit
+    // this.http.post('/playlist', {name: this.model.Name, account: {name: this.userName, email: this.email, password: this.password}}).map((response: Response) => response.json());
+    //
+    this.http.post('/playlist', {name: this.model.Name, account: {name: this.userName, email: this.email, password: this.password}}).map((response: Response) => response.json())
+        .subscribe(data => {
+          this.router.navigate(['/addSong', this.model.Name])
+        });
 
   }
 
-
-  /**
-   //create a playlist
-   createPlaylist(playlistName) {
-    return this.http.post('adduser/user/createplaylist/', playlistName).map((response: Response) => response.json());
-  }
-   */
 }

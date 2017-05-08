@@ -32,12 +32,14 @@ class PlaylistController {
 
     @PostMapping("/playlist")
     Playlist addPlaylist(@RequestBody Playlist playlist) {
-        accountRepository.save(playlist.getAccount());
+        System.out.println("creating new playlist!!!! " + playlist.toString());
+        accountRepository.save(playlist.getAccount())
         return playlistService.addPlaylistService(playlist)
     }
 
     @PostMapping("/playlist/name/{playlistName}")
     Playlist addSongToPlaylist(@RequestBody Songs songs, @PathVariable String playlistName) {
+        System.out.println("adding a new song to the playlist!!!! " + playlistName.toString());
         def playlist = playlistRepository.findPlaylistWithMatchingName(playlistName)
         playlist.songs.add(songs)
         return playlistRepository.save(playlist)

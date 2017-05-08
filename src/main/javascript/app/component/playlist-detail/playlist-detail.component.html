@@ -1,5 +1,5 @@
 <!-- Third: display playlist details and delete a song -->
-
+<div class="well col-md-5 col-md-offset-3">
 <label>Playlist Details</label>
 <table class ="table table -sm table-striped">
 
@@ -14,13 +14,16 @@
     <!--
     edit it after returning song
     <tr *ngFor = " let song of getSong()"> -->
-    <td> {{song.name}} </td>
+    <!--<td> {{detail.name}} </td> -->
     <td>
-      <button class="btn btn-sm btn-danger">
+      <button class="btn btn-sm btn-danger" (click) = "deleteSong()">
         Delete
       </button>
     </td>
   </tr>
+  </tbody>
+</table>
+</div>
 
   <!--<td>
     <button class = "btn btn-sm btn-warning"> -->
@@ -29,9 +32,4 @@
       <!--Add New Song
     </button>
   </td> -->
-
-  </tbody>
-
-</table>
-
 
