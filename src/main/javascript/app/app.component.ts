@@ -37,12 +37,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 
   saveUser() {
-    console.log("************* " + this.model.Name)
+    console.log("************* ")
     // this.userService.create(this.model)
     //     .subscribe(data => {
     //       this.router.navigate(['/playlist']);
     //     });
-    this.router.navigate(['/createPlaylist']);
+    this.router.navigate(['/createPlaylist', this.model.Name, this.model.email, this.model.password]);
 
   }
 

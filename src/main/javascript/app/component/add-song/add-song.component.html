@@ -22,7 +22,8 @@
     <div *ngIf="song">
         <a *ngFor="let detail of this.song.tracks.items">
             <h1>Song name: {{detail.name}}</h1>
-            <button type= "submit" class="btn btn-primary" (click) = "saveSong(detail.name)">
+            <!--artistName, releaseTitle, releaseType, songTitle-->
+            <button type= "submit" class="btn btn-primary" (click) = "saveSong(detail.artists[0].name, detail.name)">
                 Add
             </button>
         </a>

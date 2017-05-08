@@ -16,8 +16,8 @@ const APP_ROUTES: Routes = [
   {path: 'artist', component: ArtistComponent},
   {path: 'song', component: SongComponent},
   {path: 'albumDetails/:href', component: AlbumDetailsComponent},
-  {path: 'addSong', component: AddSongComponent},
-  {path: 'createPlaylist', component: PlaylistCreatorComponent},
+  {path: 'addSong/:playlistName', component: AddSongComponent},
+  {path: 'createPlaylist/:name/:email/:password', component: PlaylistCreatorComponent},
 
   {path: 'PlaylistDetail', component: PlaylistDetailComponent }
   /** suggested routes
