@@ -2,37 +2,22 @@
 <div class="well col-md-5 col-md-offset-3">
 <label>Playlist Details</label>
 <table class ="table table -sm table-striped">
-
+  <div *ngIf="playlist">
   <thead>
   <tr>
-    <th>Song Name</th>
-    <div *ngIf="playlist">
-      <h1>Song name: {{this.playlist}}</h1>
-    </div>
-  </tr>
-  </thead>
-
-  <tbody>
-  <tr>
-    <!--
-    edit it after returning song
-    <tr *ngFor = " let song of getSong()"> -->
-    <!--<td> {{detail.name}} </td> -->
-    <td>
+    <a *ngFor="let detail of this.playlist.songs">
+      <h1>Song name: {{this.detail.title}}</h1>
       <button class="btn btn-sm btn-danger" (click) = "deleteSong()">
         Delete
       </button>
-    </td>
+    </a>
   </tr>
-  </tbody>
+  <td>
+
+  </td>
+  </thead>
+  </div>
 </table>
 </div>
 
-  <!--<td>
-    <button class = "btn btn-sm btn-warning"> -->
-           <!-- change route later -->
-            <!--[routerLink] = "user/playlist/:name"-->
-      <!--Add New Song
-    </button>
-  </td> -->
 
