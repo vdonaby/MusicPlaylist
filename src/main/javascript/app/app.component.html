@@ -33,7 +33,7 @@
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
             <label for="email">Email</label>
             <input type="email" id="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required pattern="" minlength="3" maxlength="40"/>
-            <div *ngIf="(email.errors?.required && !email?.errors?.minlength && !email?.errors?.maxlength && !email?.errors?.pattern) && (!email.pristine || f.submitted)"
+            <div *ngIf="(email.errors?.required && !email?.errors?.minlength && !email?.errors?.maxlength) && (!email.pristine || f.submitted)"
                  class="alert alert-danger">
                 email is required and format should be <i>john@doe.com</i>.
             </div>
@@ -42,9 +42,10 @@
 
         <div class = "form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" minlength="8" maxlength="32"/>
-            <div *ngIf="(password.errors?.required && !password?.errors?.pattern && !password?.errors?.minlength && !password?.errors?.maxlength) && (!password.pristine || f.submitted)" class="alert alert-danger">
-                password is required
+            <input type="password" id="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required minlength="8" maxlength="32"/>
+            <div *ngIf="(password.errors?.required && !password?.errors?.pattern && !password?.errors?.minlength && !password?.errors?.maxlength) && (!password.pristine || f.submitted)"
+                 class="alert alert-danger">
+                password is required please use at least 8 characters, a combination of upercase and lowercase, and one number
             </div>
         </div>
 

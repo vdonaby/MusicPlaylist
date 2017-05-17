@@ -3,6 +3,7 @@ import {SpotifyService} from "./service/spotify.service";
 import {Router} from "@angular/router";
 import {UserService} from "./service/user.service";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +15,6 @@ export class AppComponent implements OnInit {
 
   playlistBody: any;
   playlist: any;
-  reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$";
 
 
   onSubmit() {
