@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   playlistBody: any;
   playlist: any;
 
+
   onSubmit() {
 
     /**this.playlistBody = {"name": "myPlaylist12","account":{"name": "myPlaylist ","password": "Password1713","email": "vdonaby55@gmail.com"}};
@@ -34,7 +35,8 @@ export class AppComponent implements OnInit {
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   saveUser() {
     console.log("************* ")
